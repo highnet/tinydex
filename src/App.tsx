@@ -3,37 +3,25 @@ import {Pokemon} from "./Pokemon";
 
 export default function App() {
 	const [pokemonMap, setPokemonMap] = useState<Map<string, Pokemon>>(new Map());
-	const [searchTerm, setSearchTerm] = useState("");
-	const [inputTerm, setInputTerm] = useState(1);
 	const [currentPokemonId, setCurrentPokemonId] = useState("1");
-	const [nameSearchTerm, setNameSearchTerm] = useState("");
+	const [inputTerm, setInputTerm] = useState("");
 
-	const fetchPokemon = async (searchTerm: string) => {
-		if (pokemonMap.has(searchTerm)) {
+	const fetchPokemon = async (inputTerm: string) => {
+		if (pokemonMap.has(inputTerm)) {
 			console.log("Pokemon already in map");
-			setPokemonMap(pokemonMap);
-			setSearchTerm(searchTerm);
+			setCurrentPokemonId(inputTerm);
 			return;
 		}
+		console.log("Pokemon not in map");
+		// Search by id
+		const response = await fetch(
+			`https://pokeapi.co/api/v2/pokemon/${inputTerm}`
+		);
 
-		console.log("Fetching Pokemon");
-		let response;
-		if (isNaN(parseInt(searchTerm))) {
-			// Search by name
-			const speciesResponse = await fetch(
-				`https://pokeapi.co/api/v2/pokemon-species/${searchTerm}`
-			);
-			const speciesData = await speciesResponse.json();
-			const id = speciesData.id;
-			response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-		} else {
-			// Search by ID
-			response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`);
-		}
 		const data = await response.json();
 		const newPokemonMap = new Map(pokemonMap);
 		newPokemonMap.set(
-			searchTerm,
+			inputTerm,
 			new Pokemon()
 				.Height(data.height)
 				.Id(data.id)
@@ -41,44 +29,57 @@ export default function App() {
 				.Weight(data.weight)
 				.Sprites(data.sprites)
 		);
-		setCurrentPokemonId(data.id);
 		setPokemonMap(newPokemonMap);
-		setSearchTerm(searchTerm);
+		setCurrentPokemonId(inputTerm);
 	};
 
 	useEffect(() => {
-		fetchPokemon(inputTerm.toString());
+		fetchPokemon(currentPokemonId);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const handleNextPokemon = () => {
+		const nextPokemonId = parseInt(currentPokemonId) + 1;
+		if (nextPokemonId > 1010) {
+			fetchPokemon("1");
+		} else {
+			fetchPokemon(nextPokemonId.toString());
+		}
+	};
+
+	const handlePreviousPokemon = () => {
+		const previousPokemonId = parseInt(currentPokemonId) - 1;
+		if (previousPokemonId < 1) {
+			fetchPokemon("1010");
+		} else {
+			fetchPokemon(previousPokemonId.toString());
+		}
+	};
 
 	return (
 		<div className="App">
 			<h1>Pokedex</h1>
-			<input
-				type="number"
-				placeholder="Search for a Pokemon by ID"
-				value={inputTerm}
-				onChange={(e) => setInputTerm(parseInt(e.target.value))}
-			/>
-			<button onClick={() => fetchPokemon(inputTerm.toString())}>Search</button>
+
 			<input
 				type="text"
 				placeholder="Search for a Pokemon by name"
-				value={nameSearchTerm}
-				onChange={(e) => setNameSearchTerm(e.target.value)}
+				value={inputTerm}
+				onChange={(e) => setInputTerm(e.target.value)}
 			/>
-			<button onClick={() => fetchPokemon(nameSearchTerm)}>Search</button>
+			<button onClick={() => fetchPokemon(inputTerm)}>Search</button>
+			<button onClick={handlePreviousPokemon}>Previous</button>
+			<button onClick={handleNextPokemon}>Next</button>
 			<ul>
 				{currentPokemonId && (
-					<li key={pokemonMap.get(searchTerm)?.id}>
+					<li key={pokemonMap.get(currentPokemonId)?.id}>
 						<img
-							src={pokemonMap.get(searchTerm)?.sprites.front_default}
-							alt={pokemonMap.get(searchTerm)?.name}
+							src={pokemonMap.get(currentPokemonId)?.sprites.front_default}
+							alt={pokemonMap.get(currentPokemonId)?.name}
 						/>
-						<h2>{pokemonMap.get(searchTerm)?.name}</h2>
-						<p>Height: {pokemonMap.get(searchTerm)?.height}</p>
-						<p>Weight: {pokemonMap.get(searchTerm)?.weight}</p>
-						<p>Id: {pokemonMap.get(searchTerm)?.id}</p>
+						<h2>{pokemonMap.get(currentPokemonId)?.name}</h2>
+						<p>Height: {pokemonMap.get(currentPokemonId)?.height}</p>
+						<p>Weight: {pokemonMap.get(currentPokemonId)?.weight}</p>
+						<p>Id: {pokemonMap.get(currentPokemonId)?.id}</p>
 					</li>
 				)}
 			</ul>

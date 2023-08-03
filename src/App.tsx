@@ -3,25 +3,32 @@ import {Pokemon} from "./Pokemon";
 
 export default function App() {
 	const [pokemonMap, setPokemonMap] = useState<Map<string, Pokemon>>(new Map());
-	const [currentPokemonId, setCurrentPokemonId] = useState("1");
+	const [currentPokemonId, setCurrentPokemonId] = useState("bulbasaur");
 	const [inputTerm, setInputTerm] = useState("");
 
-	const fetchPokemon = async (inputTerm: string) => {
-		if (pokemonMap.has(inputTerm)) {
+	const fetchPokemon = async (pokemonTerm: string) => {
+		if (isNaN(parseInt(pokemonTerm))) {
+			pokemonTerm = await getPokemonIdByName(pokemonTerm).then((id) =>
+				id.toString()
+			);
+		}
+
+		if (pokemonMap.has(pokemonTerm)) {
 			console.log("Pokemon already in map");
-			setCurrentPokemonId(inputTerm);
+			setCurrentPokemonId(pokemonTerm);
 			return;
 		}
 		console.log("Pokemon not in map");
+
 		// Search by id
 		const response = await fetch(
-			`https://pokeapi.co/api/v2/pokemon/${inputTerm}`
+			`https://pokeapi.co/api/v2/pokemon/${pokemonTerm}`
 		);
 
 		const data = await response.json();
 		const newPokemonMap = new Map(pokemonMap);
 		newPokemonMap.set(
-			inputTerm,
+			pokemonTerm,
 			new Pokemon()
 				.Height(data.height)
 				.Id(data.id)
@@ -30,8 +37,14 @@ export default function App() {
 				.Sprites(data.sprites)
 		);
 		setPokemonMap(newPokemonMap);
-		setCurrentPokemonId(inputTerm);
+		setCurrentPokemonId(pokemonTerm);
 	};
+
+	async function getPokemonIdByName(name: string): Promise<number> {
+		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+		const data = await response.json();
+		return data.id;
+	}
 
 	useEffect(() => {
 		fetchPokemon(currentPokemonId);
@@ -64,9 +77,11 @@ export default function App() {
 				type="text"
 				placeholder="Search for a Pokemon by name"
 				value={inputTerm}
-				onChange={(e) => setInputTerm(e.target.value)}
+				onChange={(e) => {
+					setInputTerm(e.target.value);
+					fetchPokemon(e.target.value);
+				}}
 			/>
-			<button onClick={() => fetchPokemon(inputTerm)}>Search</button>
 			<button onClick={handlePreviousPokemon}>Previous</button>
 			<button onClick={handleNextPokemon}>Next</button>
 			<ul>

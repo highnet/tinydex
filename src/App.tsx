@@ -2,16 +2,16 @@ import {useEffect, useState} from "react";
 import {Pokemon} from "./Pokemon";
 
 export default function App() {
-	const [searchTerm, setSearchTerm] = useState("");
 	const [pokemonMap, setPokemonMap] = useState<Map<string, Pokemon>>(new Map());
-	const [inputTerm, setInputTerm] = useState("bulbasaur");
+	const [searchTerm, setSearchTerm] = useState("");
+	const [inputTerm, setInputTerm] = useState(1);
 	const [currentPokemonId, setCurrentPokemonId] = useState("1");
 
 	const fetchPokemon = async () => {
-		if (pokemonMap.has(inputTerm)) {
+		if (pokemonMap.has(inputTerm.toString())) {
 			console.log("Pokemon already in map");
 			setPokemonMap(pokemonMap);
-			setSearchTerm(inputTerm);
+			setSearchTerm(inputTerm.toString());
 			return;
 		}
 
@@ -22,7 +22,7 @@ export default function App() {
 		const data = await response.json();
 		const newPokemonMap = new Map(pokemonMap);
 		newPokemonMap.set(
-			inputTerm,
+			inputTerm.toString(),
 			new Pokemon()
 				.Height(data.height)
 				.Id(data.id)
@@ -32,7 +32,7 @@ export default function App() {
 		);
 		setCurrentPokemonId(data.id);
 		setPokemonMap(newPokemonMap);
-		setSearchTerm(inputTerm);
+		setSearchTerm(inputTerm.toString());
 	};
 
 	useEffect(() => {
@@ -44,10 +44,10 @@ export default function App() {
 		<div className="App">
 			<h1>Pokedex</h1>
 			<input
-				type="text"
-				placeholder="Search for a Pokemon"
+				type="number"
+				placeholder="Search for a Pokemon by ID"
 				value={inputTerm}
-				onChange={(e) => setInputTerm(e.target.value)}
+				onChange={(e) => setInputTerm(parseInt(e.target.value))}
 			/>
 			<button onClick={fetchPokemon}>Search</button>
 			<ul>

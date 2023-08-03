@@ -6,23 +6,34 @@ export default function App() {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [inputTerm, setInputTerm] = useState(1);
 	const [currentPokemonId, setCurrentPokemonId] = useState("1");
+	const [nameSearchTerm, setNameSearchTerm] = useState("");
 
-	const fetchPokemon = async () => {
-		if (pokemonMap.has(inputTerm.toString())) {
+	const fetchPokemon = async (searchTerm: string) => {
+		if (pokemonMap.has(searchTerm)) {
 			console.log("Pokemon already in map");
 			setPokemonMap(pokemonMap);
-			setSearchTerm(inputTerm.toString());
+			setSearchTerm(searchTerm);
 			return;
 		}
 
 		console.log("Fetching Pokemon");
-		const response = await fetch(
-			`https://pokeapi.co/api/v2/pokemon/${inputTerm}`
-		);
+		let response;
+		if (isNaN(parseInt(searchTerm))) {
+			// Search by name
+			const speciesResponse = await fetch(
+				`https://pokeapi.co/api/v2/pokemon-species/${searchTerm}`
+			);
+			const speciesData = await speciesResponse.json();
+			const id = speciesData.id;
+			response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+		} else {
+			// Search by ID
+			response = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchTerm}`);
+		}
 		const data = await response.json();
 		const newPokemonMap = new Map(pokemonMap);
 		newPokemonMap.set(
-			inputTerm.toString(),
+			searchTerm,
 			new Pokemon()
 				.Height(data.height)
 				.Id(data.id)
@@ -32,11 +43,11 @@ export default function App() {
 		);
 		setCurrentPokemonId(data.id);
 		setPokemonMap(newPokemonMap);
-		setSearchTerm(inputTerm.toString());
+		setSearchTerm(searchTerm);
 	};
 
 	useEffect(() => {
-		fetchPokemon();
+		fetchPokemon(inputTerm.toString());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -49,7 +60,14 @@ export default function App() {
 				value={inputTerm}
 				onChange={(e) => setInputTerm(parseInt(e.target.value))}
 			/>
-			<button onClick={fetchPokemon}>Search</button>
+			<button onClick={() => fetchPokemon(inputTerm.toString())}>Search</button>
+			<input
+				type="text"
+				placeholder="Search for a Pokemon by name"
+				value={nameSearchTerm}
+				onChange={(e) => setNameSearchTerm(e.target.value)}
+			/>
+			<button onClick={() => fetchPokemon(nameSearchTerm)}>Search</button>
 			<ul>
 				{currentPokemonId && (
 					<li key={pokemonMap.get(searchTerm)?.id}>

@@ -30,36 +30,32 @@ export default function App() {
 		fetchPokemonNames();
 	}, []);
 
-	const fetchPokemon = async (pokemonNameOrIdPartialSearchTerm: string) => {
+	const fetchPokemon = async (pokemonNameOrIdSearchTerm: string) => {
 		// fetches a pokemon based on name or id
-		if (pokemonNameOrIdPartialSearchTerm === "") return;
-
-		if (!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm)) {
-			// if the input is not a pokemon name, try to find a matching name
-			const pokemonMatchingName = partialPokemonNameSearch(
-				allPokemonNames,
-				pokemonNameOrIdPartialSearchTerm
-			);
-
-			if (pokemonMatchingName) {
-				pokemonNameOrIdPartialSearchTerm = pokemonMatchingName;
-			}
-		}
+		if (pokemonNameOrIdSearchTerm === "") return;
 
 		const validRegex = new RegExp( // regex to validate the input
-			`^$|^([1-9]|[1-9][0-9]{0,2}|1000|1001|1002|1003|1004|1005|1006|1007|1008|1009|1010)$|^(${allPokemonNames.join(
+			`^([1-9]|[1-9][0-9]{0,2}|1000|1001|1002|1003|1004|1005|1006|1007|1008|1009|1010)$|^(${allPokemonNames.join(
 				"|"
 			)})$`
 		);
 
-		if (!validRegex.test(pokemonNameOrIdPartialSearchTerm)) {
-			// if the input is not valid, return
-			return;
+		if (!validRegex.test(pokemonNameOrIdSearchTerm)) {
+			const pokemonWithMatchingName = partialPokemonNameSearch(
+				allPokemonNames,
+				pokemonNameOrIdSearchTerm
+			);
+
+			pokemonNameOrIdSearchTerm = pokemonWithMatchingName
+				? pokemonWithMatchingName
+				: "";
 		}
+
+		if (pokemonNameOrIdSearchTerm === "") return;
 
 		const pokeAPIResponse = await fetch(
 			// fetch the pokemon data from the API
-			`https://pokeapi.co/api/v2/pokemon/${pokemonNameOrIdPartialSearchTerm}`
+			`https://pokeapi.co/api/v2/pokemon/${pokemonNameOrIdSearchTerm}`
 		);
 
 		const pokeAPIData = await pokeAPIResponse.json();

@@ -1,16 +1,16 @@
 import {useState, useEffect} from "react";
+import "./tinydex.css";
 import {Pokemon} from "./Pokemon";
 import TextField from "./TextField/TextField";
-import Button from "./Button/Button";
 import Typography from "./Typography/Typography";
-import "./tinydex.css";
+import PokemonCarousel from "./PokemonCarousel/PokemonCarousel";
 
 export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
 	const [currentPokemon, setCurrentPokemon] = useState(new Pokemon());
 	const [currentPokemonId, setCurrentPokemonId] = useState(1);
 	const [allPokemonNames, setAllPokemonNames] = useState<string[]>([]);
-	const [showSprite, setShowSprite] = useState(false);
+	const maxPokemonId = 1010;
 
 	useEffect(() => {
 		const fetchPokemonNames = async () => {
@@ -51,10 +51,6 @@ export default function App() {
 
 		setCurrentPokemonId(pokeAPIData.id);
 		setCurrentPokemon(pokemon);
-		setShowSprite(false);
-		setTimeout(() => {
-			setShowSprite(true);
-		}, 100);
 	};
 
 	useEffect(() => {
@@ -62,19 +58,19 @@ export default function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPokemonId]);
 
-	const handleNextPokemon = () => {
-		if (currentPokemonId === 1010) {
-			setCurrentPokemonId(1);
+	const handlePokemon = (isNext: boolean) => {
+		if (isNext) {
+			if (currentPokemonId === maxPokemonId) {
+				setCurrentPokemonId(1);
+			} else {
+				setCurrentPokemonId(currentPokemonId + 1);
+			}
 		} else {
-			setCurrentPokemonId(currentPokemonId + 1);
-		}
-	};
-
-	const handlePreviousPokemon = () => {
-		if (currentPokemonId === 1) {
-			setCurrentPokemonId(1010);
-		} else {
-			setCurrentPokemonId(currentPokemonId - 1);
+			if (currentPokemonId === 1) {
+				setCurrentPokemonId(maxPokemonId);
+			} else {
+				setCurrentPokemonId(currentPokemonId - 1);
+			}
 		}
 	};
 
@@ -84,27 +80,11 @@ export default function App() {
 				<Typography variant="text-title-large" className="main-title">
 					TinyDex
 				</Typography>
-				<Typography variant="text-body-medium">{currentPokemon.id}</Typography>
-
-				<Typography variant="text-body-medium">
-					{currentPokemon.name}
-				</Typography>
-				<div className="pokemon-carousel">
-					<Button className="carousel-button" onClick={handlePreviousPokemon}>
-						←
-					</Button>
-					<img
-						src={currentPokemon.sprite}
-						alt="Pokemon Sprite"
-						className={`pokemon-sprite ${showSprite ? "show" : ""}`}
-					/>
-					<Button className="carousel-button" onClick={handleNextPokemon}>
-						→
-					</Button>
-				</div>
-				<Typography className="pokemon-types" variant="text-body-medium">
-					{currentPokemon.types.join(", ")}
-				</Typography>
+				<PokemonCarousel
+					pokemon={currentPokemon}
+					handlePreviousPokemon={() => handlePokemon(false)}
+					handleNextPokemon={() => handlePokemon(true)}
+				/>
 				<TextField
 					configuration="outlined"
 					textConfiguration="label-placeholder"

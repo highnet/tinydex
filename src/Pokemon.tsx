@@ -1,4 +1,11 @@
-export class Pokemon {
+interface IPokemon {
+	id: number;
+	name: string;
+	sprite: string;
+	types: string[];
+}
+
+export class Pokemon implements IPokemon {
 	id: number = 0;
 	name: string = "";
 	sprite: string = "";

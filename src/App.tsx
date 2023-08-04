@@ -2,12 +2,15 @@ import {useState, useEffect} from "react";
 import {Pokemon} from "./Pokemon";
 import TextField from "./TextField/TextField";
 import Button from "./Button/Button";
+import Typography from "./Typography/Typography";
+import "./tinydex.css";
 
 export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
-	const [pokemon, setPokemon] = useState(new Pokemon());
-	const [pokemonId, setPokemonId] = useState(1);
-	const [pokemonNames, setPokemonNames] = useState<string[]>([]);
+	const [currentPokemon, setCurrentPokemon] = useState(new Pokemon());
+	const [currentPokemonId, setCurrentPokemonId] = useState(1);
+	const [allPokemonNames, setAllPokemonNames] = useState<string[]>([]);
+	const [showSprite, setShowSprite] = useState(false);
 
 	useEffect(() => {
 		const fetchPokemonNames = async () => {
@@ -16,7 +19,7 @@ export default function App() {
 			);
 			const data = await response.json();
 			const names = data.results.map((result: {name: string}) => result.name);
-			setPokemonNames(names);
+			setAllPokemonNames(names);
 		};
 		fetchPokemonNames();
 	}, []);
@@ -24,7 +27,7 @@ export default function App() {
 	const fetchPokemon = async (pokemonNameOrIdPartialSearchTerm: string) => {
 		if (pokemonNameOrIdPartialSearchTerm === "") return;
 
-		const pokemonMatchingName = pokemonNames.find((name) =>
+		const pokemonMatchingName = allPokemonNames.find((name) =>
 			name
 				.toLowerCase()
 				.startsWith(pokemonNameOrIdPartialSearchTerm.toLowerCase())
@@ -41,64 +44,83 @@ export default function App() {
 		const pokemon = new Pokemon()
 			.Id(pokeAPIData.id)
 			.Name(pokeAPIData.name)
-			.Sprites(pokeAPIData.sprites)
+			.Sprite(pokeAPIData.sprites.other["official-artwork"].front_default)
 			.Types(
 				pokeAPIData.types.map((type: {type: {name: string}}) => type.type.name)
 			);
 
-		setPokemonId(pokeAPIData.id);
-		setPokemon(pokemon);
+		setCurrentPokemonId(pokeAPIData.id);
+		setCurrentPokemon(pokemon);
+		setShowSprite(false);
+		setTimeout(() => {
+			setShowSprite(true);
+		}, 100);
 	};
 
 	useEffect(() => {
-		fetchPokemon(pokemonId.toString());
+		fetchPokemon(currentPokemonId.toString());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [pokemonId]);
+	}, [currentPokemonId]);
 
 	const handleNextPokemon = () => {
-		if (pokemonId === 1010) {
-			setPokemonId(1);
+		if (currentPokemonId === 1010) {
+			setCurrentPokemonId(1);
 		} else {
-			setPokemonId(pokemonId + 1);
+			setCurrentPokemonId(currentPokemonId + 1);
 		}
 	};
 
 	const handlePreviousPokemon = () => {
-		if (pokemonId === 1) {
-			setPokemonId(1010);
+		if (currentPokemonId === 1) {
+			setCurrentPokemonId(1010);
 		} else {
-			setPokemonId(pokemonId - 1);
+			setCurrentPokemonId(currentPokemonId - 1);
 		}
 	};
 
 	return (
 		<div className="App">
-			<h1>TinyDex</h1>
+			<div className="tinydex">
+				<Typography variant="text-title-large" className="main-title">
+					TinyDex
+				</Typography>
+				<Typography variant="text-body-medium">{currentPokemon.id}</Typography>
 
-			<TextField
-				configuration="filled"
-				textConfiguration="label-placeholder"
-				leadingIconName="search"
-				trailingIcon={false}
-				validRegex={
-					"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" + pokemonNames.join("|") + ")$"
-				}
-				placeholder="Bulbasaur"
-				defaultValue={inputTerm}
-				label="Number/Name"
-				onChange={(e) => {
-					setInputTerm((e.target as HTMLInputElement).value);
-					fetchPokemon((e.target as HTMLInputElement).value);
-				}}></TextField>
-
-			<Button onClick={handlePreviousPokemon}>Previous</Button>
-			<Button onClick={handleNextPokemon}>Next</Button>
-
-			<div>
-				<img src={pokemon.sprites.front_default} alt="Pokemon Sprite" />
-				<h1>{pokemon.name}</h1>
-				<h2>{pokemon.id}</h2>
-				<h3>{pokemon.types.join(", ")}</h3>
+				<Typography variant="text-body-medium">
+					{currentPokemon.name}
+				</Typography>
+				<div className="pokemon-carousel">
+					<Button className="carousel-button" onClick={handlePreviousPokemon}>
+						←
+					</Button>
+					<img
+						src={currentPokemon.sprite}
+						alt="Pokemon Sprite"
+						className={`pokemon-sprite ${showSprite ? "show" : ""}`}
+					/>
+					<Button className="carousel-button" onClick={handleNextPokemon}>
+						→
+					</Button>
+				</div>
+				<Typography className="pokemon-types" variant="text-body-medium">
+					{currentPokemon.types.join(", ")}
+				</Typography>
+				<TextField
+					configuration="outlined"
+					textConfiguration="label-placeholder"
+					trailingIcon={false}
+					validRegex={
+						"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" +
+						allPokemonNames.join("|") +
+						")$"
+					}
+					placeholder="Bulbasaur"
+					defaultValue={inputTerm}
+					label="Number/Name"
+					onChange={(e) => {
+						setInputTerm((e.target as HTMLInputElement).value);
+						fetchPokemon((e.target as HTMLInputElement).value);
+					}}></TextField>
 			</div>
 		</div>
 	);

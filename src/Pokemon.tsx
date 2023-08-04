@@ -1,9 +1,7 @@
 export class Pokemon {
 	id: number = 0;
 	name: string = "";
-	sprites: {
-		front_default: string;
-	} = {front_default: ""};
+	sprite: string = "";
 	types: string[] = [];
 
 	Id(id: number): Pokemon {
@@ -16,8 +14,8 @@ export class Pokemon {
 		return this;
 	}
 
-	Sprites(sprites: {front_default: string}): Pokemon {
-		this.sprites = sprites;
+	Sprite(sprite: string): Pokemon {
+		this.sprite = sprite;
 		return this;
 	}
 

@@ -27,7 +27,6 @@ const Typography: React.FC<ITypographyProps> = ({
 	const [_id] = useState(id || undefined);
 	const [_className] = useState(className || "");
 	const [_variant] = useState(variant || "text-body-small");
-	const [_children] = useState(children || undefined);
 
 	const _computedSplitVariants = splitVariants(_variant);
 
@@ -47,7 +46,7 @@ const Typography: React.FC<ITypographyProps> = ({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}>
-			{_children}
+			{children}
 		</div>
 	);
 };

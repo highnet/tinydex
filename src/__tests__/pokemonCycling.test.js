@@ -1,4 +1,4 @@
-import { handlePokemonCycle } from '../pokemonUtils';
+import { handlePokemonCycle } from '../Gizmos/pokemonUtils';
 import { expect, describe, it } from 'vitest'
 
 describe('handlePokemonCycle', () => {

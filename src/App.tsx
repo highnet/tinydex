@@ -5,6 +5,7 @@ import {Pokemon} from "./Pokemon";
 import TextField from "./TextField/TextField";
 import Typography from "./Typography/Typography";
 import PokemonCarousel from "./PokemonCarousel/PokemonCarousel";
+import {handlePokemonCycle, partialPokemonNameSearch} from "./pokemonUtils";
 
 export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
@@ -29,10 +30,9 @@ export default function App() {
 		if (pokemonNameOrIdPartialSearchTerm === "") return;
 
 		if (!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm)) {
-			const pokemonMatchingName = allPokemonNames.find((name) =>
-				name
-					.toLowerCase()
-					.startsWith(pokemonNameOrIdPartialSearchTerm.toLowerCase())
+			const pokemonMatchingName = partialPokemonNameSearch(
+				allPokemonNames,
+				pokemonNameOrIdPartialSearchTerm
 			);
 
 			if (pokemonMatchingName) {
@@ -73,20 +73,10 @@ export default function App() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPokemonId]);
 
-	const handlePokemon = (isNext: boolean) => {
-		if (isNext) {
-			if (currentPokemonId === maxPokemonId) {
-				setCurrentPokemonId(1);
-			} else {
-				setCurrentPokemonId(currentPokemonId + 1);
-			}
-		} else {
-			if (currentPokemonId === 1) {
-				setCurrentPokemonId(maxPokemonId);
-			} else {
-				setCurrentPokemonId(currentPokemonId - 1);
-			}
-		}
+	const handlePokemonCycling = (isNext: boolean) => {
+		setCurrentPokemonId((prevPokemonId) =>
+			handlePokemonCycle(prevPokemonId, maxPokemonId, isNext)
+		);
 	};
 
 	return (
@@ -97,8 +87,8 @@ export default function App() {
 				</Typography>
 				<PokemonCarousel
 					pokemon={currentPokemon}
-					handlePreviousPokemon={() => handlePokemon(false)}
-					handleNextPokemon={() => handlePokemon(true)}
+					handlePreviousPokemon={() => handlePokemonCycling(false)}
+					handleNextPokemon={() => handlePokemonCycling(true)}
 				/>
 				<TextField
 					configuration="outlined"

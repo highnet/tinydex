@@ -1,71 +1,47 @@
-import {useEffect, useState} from "react";
+import {useState, useEffect} from "react";
 import {Pokemon} from "./Pokemon";
 
 export default function App() {
-	const [pokemonMap, setPokemonMap] = useState<Map<string, Pokemon>>(new Map());
-	const [currentPokemonId, setCurrentPokemonId] = useState("bulbasaur");
 	const [inputTerm, setInputTerm] = useState("");
+	const [pokemon, setPokemon] = useState(new Pokemon());
+	const [pokemonId, setPokemonId] = useState(1);
 
-	const fetchPokemon = async (pokemonTerm: string) => {
-		if (isNaN(parseInt(pokemonTerm))) {
-			pokemonTerm = await getPokemonIdByName(pokemonTerm).then((id) =>
-				id.toString()
-			);
-		}
+	const fetchPokemon = async (pokemonSearchTerm: string) => {
+		if (pokemonSearchTerm === "") return;
 
-		if (pokemonMap.has(pokemonTerm)) {
-			console.log("Pokemon already in map");
-			setCurrentPokemonId(pokemonTerm);
-			return;
-		}
-		console.log("Pokemon not in map");
-
-		// Search by id
 		const response = await fetch(
-			`https://pokeapi.co/api/v2/pokemon/${pokemonTerm}`
+			`https://pokeapi.co/api/v2/pokemon/${pokemonSearchTerm}`
 		);
-
 		const data = await response.json();
-		const newPokemonMap = new Map(pokemonMap);
-		newPokemonMap.set(
-			pokemonTerm,
-			new Pokemon()
-				.Height(data.height)
-				.Id(data.id)
-				.Name(data.name)
-				.Weight(data.weight)
-				.Sprites(data.sprites)
-		);
-		setPokemonMap(newPokemonMap);
-		setCurrentPokemonId(pokemonTerm);
+
+		const newPokemon = new Pokemon()
+			.Id(data.id)
+			.Name(data.name)
+			.Height(data.height)
+			.Weight(data.weight)
+			.Sprites(data.sprites);
+
+		setPokemonId(data.id);
+		setPokemon(newPokemon);
 	};
 
-	async function getPokemonIdByName(name: string): Promise<number> {
-		const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-		const data = await response.json();
-		return data.id;
-	}
-
 	useEffect(() => {
-		fetchPokemon(currentPokemonId);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		fetchPokemon(pokemonId.toString());
+	}, [pokemonId]);
 
 	const handleNextPokemon = () => {
-		const nextPokemonId = parseInt(currentPokemonId) + 1;
-		if (nextPokemonId > 1010) {
-			fetchPokemon("1");
+		if (pokemonId === 1010) {
+			setPokemonId(1);
 		} else {
-			fetchPokemon(nextPokemonId.toString());
+			setPokemonId(pokemonId + 1);
 		}
 	};
 
 	const handlePreviousPokemon = () => {
-		const previousPokemonId = parseInt(currentPokemonId) - 1;
-		if (previousPokemonId < 1) {
-			fetchPokemon("1010");
+		if (pokemonId === 1) {
+			setPokemonId(1010);
 		} else {
-			fetchPokemon(previousPokemonId.toString());
+			setPokemonId(pokemonId - 1);
 		}
 	};
 
@@ -84,20 +60,12 @@ export default function App() {
 			/>
 			<button onClick={handlePreviousPokemon}>Previous</button>
 			<button onClick={handleNextPokemon}>Next</button>
-			<ul>
-				{currentPokemonId && (
-					<li key={pokemonMap.get(currentPokemonId)?.id}>
-						<img
-							src={pokemonMap.get(currentPokemonId)?.sprites.front_default}
-							alt={pokemonMap.get(currentPokemonId)?.name}
-						/>
-						<h2>{pokemonMap.get(currentPokemonId)?.name}</h2>
-						<p>Height: {pokemonMap.get(currentPokemonId)?.height}</p>
-						<p>Weight: {pokemonMap.get(currentPokemonId)?.weight}</p>
-						<p>Id: {pokemonMap.get(currentPokemonId)?.id}</p>
-					</li>
-				)}
-			</ul>
+
+			<div>
+				<img src={pokemon.sprites.front_default} alt="Pokemon Sprite" />
+				<h2>{pokemon.name}</h2>
+				<h1>{pokemon.id}</h1>
+			</div>
 		</div>
 	);
 }

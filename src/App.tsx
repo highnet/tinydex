@@ -46,18 +46,6 @@ export default function App() {
 			}
 		}
 
-		/*
-		if (
-			pokemonNameOrIdPartialSearchTerm === "" ||
-			(!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm) &&
-				(isNaN(Number(pokemonNameOrIdPartialSearchTerm)) ||
-					Number(pokemonNameOrIdPartialSearchTerm) < 1 ||
-					Number(pokemonNameOrIdPartialSearchTerm) > maxPokemonId))
-		) {
-			return; // If the search term is empty or not a valid pokemon name or id, return
-		}
-		*/
-
 		const validRegex = new RegExp( // regex to validate the input
 			`^$|^([1-9]|[1-9][0-9]{0,2}|1000|1001|1002|1003|1004|1005|1006|1007|1008|1009|1010)$|^(${allPokemonNames.join(
 				"|"

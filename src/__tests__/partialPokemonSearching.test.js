@@ -1,4 +1,4 @@
-import { partialPokemonNameSearch } from "./pokemonUtils";
+import { partialPokemonNameSearch } from "../pokemonUtils";
 import { expect, describe, it } from "vitest";
 
 describe('partialPokemonNameSearch', () => {

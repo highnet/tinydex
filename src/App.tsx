@@ -40,13 +40,11 @@ export default function App() {
 			}
 		}
 
-		if (
-			pokemonNameOrIdPartialSearchTerm === "" ||
-			(!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm) &&
-				(isNaN(Number(pokemonNameOrIdPartialSearchTerm)) ||
-					Number(pokemonNameOrIdPartialSearchTerm) < 1 ||
-					Number(pokemonNameOrIdPartialSearchTerm) > maxPokemonId))
-		) {
+		const validRegex = new RegExp(
+			`^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(${allPokemonNames.join("|")})$`
+		);
+
+		if (!validRegex.test(pokemonNameOrIdPartialSearchTerm)) {
 			return;
 		}
 

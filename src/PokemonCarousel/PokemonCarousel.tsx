@@ -12,12 +12,13 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 	pokemon,
 }) => {
 	const [isFadingOut, setIsFadingOut] = useState(false);
+	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
 	useEffect(() => {
 		setIsFadingOut(true);
 		const timeoutId = setTimeout(() => {
 			setIsFadingOut(false);
-		}, 400);
+		}, 200);
 		return () => clearTimeout(timeoutId);
 	}, [pokemon?.id]);
 
@@ -38,12 +39,35 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 		);
 	});
 
+	const handlePreviousPokemonWithCooldown = () => {
+		if (!isButtonDisabled) {
+			setIsButtonDisabled(true);
+			handlePreviousPokemon?.();
+			setTimeout(() => {
+				setIsButtonDisabled(false);
+			}, 1000);
+		}
+	};
+
+	const handleNextPokemonWithCooldown = () => {
+		if (!isButtonDisabled) {
+			setIsButtonDisabled(true);
+			handleNextPokemon?.();
+			setTimeout(() => {
+				setIsButtonDisabled(false);
+			}, 1000);
+		}
+	};
+
 	return (
 		<div id={id} className={_computedComponentClassName}>
 			<Typography variant="text-title-medium">#{pokemon?.id}</Typography>
 			<Typography variant="text-title-large">{pokemon?.name}</Typography>
 			<div className="pokemon-carousel-hero">
-				<Button className="carousel-button" onClick={handlePreviousPokemon}>
+				<Button
+					className="carousel-button"
+					onClick={handlePreviousPokemonWithCooldown}
+					disabled={isButtonDisabled}>
 					←
 				</Button>
 				<img
@@ -51,7 +75,10 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 					alt="Pokemon Sprite"
 					className={isFadingOut ? "fade-out" : "fade-in"}
 				/>
-				<Button className="carousel-button" onClick={handleNextPokemon}>
+				<Button
+					className="carousel-button"
+					onClick={handleNextPokemonWithCooldown}
+					disabled={isButtonDisabled}>
 					→
 				</Button>
 			</div>

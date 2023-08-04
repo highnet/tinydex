@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {ITypographyProps} from "./ITypographyProps";
-import {StringBuilder} from "../Gizmos/StringBuilder";
+import React, { useState } from "react";
+import { ITypographyProps } from "./ITypographyProps";
+import { StringBuilder } from "../Gizmos/StringBuilder";
 
 // This function splits the variant string into an array of strings
 // that represent each part of the variant
@@ -52,7 +52,8 @@ const Typography: React.FC<ITypographyProps> = ({
 			className={_computedComponentClassName}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			onMouseMove={onMouseMove}>
+			onMouseMove={onMouseMove}
+		>
 			{children}
 		</div>
 	);

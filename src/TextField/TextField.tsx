@@ -1,7 +1,7 @@
 // Import necessary dependencies
-import React, {useRef, useState} from "react";
-import {StringBuilder} from "../Gizmos/StringBuilder";
-import {ITextFieldProps} from "./ITextFieldProps";
+import React, { useRef, useState } from "react";
+import { StringBuilder } from "../Gizmos/StringBuilder";
+import { ITextFieldProps } from "./ITextFieldProps";
 import Typography from "../Typography/Typography";
 import Icon from "../Icon/Icon";
 import IconButton from "../IconButton/IconButton";
@@ -100,13 +100,15 @@ const TextField: React.FC<ITextFieldProps> = ({
 			<div
 				ref={componentRef}
 				className={_computedComponentClassName}
-				onKeyDown={handleKeyDown}>
+				onKeyDown={handleKeyDown}
+			>
 				{_configuration === "outlined" &&
 					(_textConfiguration === "label-input" ||
 						_textConfiguration === "label-placeholder") && (
 						<Typography
 							variant="text-body-small"
-							className={"label-on-text-field label-on-text-field-outlined"}>
+							className={"label-on-text-field label-on-text-field-outlined"}
+						>
 							{(_textConfiguration === "label-input" ||
 								_textConfiguration === "label-placeholder") &&
 								_label}
@@ -124,7 +126,8 @@ const TextField: React.FC<ITextFieldProps> = ({
 								_textConfiguration === "label-placeholder") && (
 								<Typography
 									variant="text-body-small"
-									className={"label-on-text-field label-on-text-field-filled"}>
+									className={"label-on-text-field label-on-text-field-filled"}
+								>
 									{(_textConfiguration === "label-input" ||
 										_textConfiguration === "label-placeholder") &&
 										_label}
@@ -141,12 +144,14 @@ const TextField: React.FC<ITextFieldProps> = ({
 							placeholder={_placeholder}
 							onFocus={handleFocus}
 							onBlur={handleBlur}
-							onChange={onChange}></input>
+							onChange={onChange}
+						></input>
 					</div>
 					{_trailingIcon && (
 						<IconButton
 							onClick={handleResetTextFieldValue}
-							className="trailing-icon-on-text-field">
+							className="trailing-icon-on-text-field"
+						>
 							{!_isValidInput ? "error" : "cancel"}
 						</IconButton>
 					)}
@@ -160,13 +165,15 @@ const TextField: React.FC<ITextFieldProps> = ({
 						" " +
 						"text-field-active-indicator-light-theme" +
 						(!_isValidInput ? " " + "text-field-active-indicator-error" : "")
-					}></div>
+					}
+				></div>
 			)}
 			<Typography
 				className={
 					"text-field-supporting-text text-field-supporting-text-light-theme"
 				}
-				variant="text-body-small">
+				variant="text-body-small"
+			>
 				{_children}
 			</Typography>
 		</div>

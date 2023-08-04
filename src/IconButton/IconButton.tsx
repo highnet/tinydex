@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {StringBuilder} from "../Gizmos/StringBuilder";
-import {IIconButtonProps} from "./IIconButtonProps";
+import React, { useState } from "react";
+import { StringBuilder } from "../Gizmos/StringBuilder";
+import { IIconButtonProps } from "./IIconButtonProps";
 import Icon from "../Icon/Icon";
 
 // Define the IconButton component
@@ -58,7 +58,8 @@ const IconButton: React.FC<IIconButtonProps> = ({
 			onClick={(e) => {
 				onClick?.(e);
 				handleClick();
-			}}>
+			}}
+		>
 			{!_selected && <Icon>{children}</Icon>}
 			{_selected && <Icon filled={true}>{children}</Icon>}
 		</div>

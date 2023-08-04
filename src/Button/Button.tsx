@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {IButtonProps} from "./IButtonProps";
-import {StringBuilder} from "../Gizmos/StringBuilder";
+import React, { useState } from "react";
+import { IButtonProps } from "./IButtonProps";
+import { StringBuilder } from "../Gizmos/StringBuilder";
 import Icon from "../Icon/Icon";
 import Typography from "../Typography/Typography";
 
@@ -44,7 +44,8 @@ const Button: React.FC<IButtonProps> = ({
 			onClick={onClick}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			onMouseMove={onMouseMove}>
+			onMouseMove={onMouseMove}
+		>
 			{_iconName && <Icon>{_iconName}</Icon>}
 			{_children && (
 				<Typography variant="text-label-large">{_children}</Typography>

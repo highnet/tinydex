@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from "react";
-import {StringBuilder} from "../Gizmos/StringBuilder";
-import {IPokemonCarouselProps} from "./IPokemonCarouselProps";
+import React, { useState, useEffect } from "react";
+import { StringBuilder } from "../Gizmos/StringBuilder";
+import { IPokemonCarouselProps } from "./IPokemonCarouselProps";
 import Typography from "../Typography/Typography";
 import Button from "../Button/Button";
 
@@ -77,7 +77,8 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 				<Button
 					className="carousel-button"
 					onClick={handlePreviousPokemonWithCooldown}
-					disabled={isButtonDisabled}>
+					disabled={isButtonDisabled}
+				>
 					←
 				</Button>
 				<img
@@ -88,7 +89,8 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 				<Button
 					className="carousel-button"
 					onClick={handleNextPokemonWithCooldown}
-					disabled={isButtonDisabled}>
+					disabled={isButtonDisabled}
+				>
 					→
 				</Button>
 			</div>

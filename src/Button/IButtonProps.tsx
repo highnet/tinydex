@@ -1,4 +1,4 @@
-import {IComponentProps} from "../Component/IComponentProps";
+import { IComponentProps } from "../Component/IComponentProps";
 
 export interface IButtonProps extends IComponentProps {
 	configuration?: string;

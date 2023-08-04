@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {StringBuilder} from "../Gizmos/StringBuilder";
-import {IComponentProps} from "./IComponentProps";
+import React, { useState } from "react";
+import { StringBuilder } from "../Gizmos/StringBuilder";
+import { IComponentProps } from "./IComponentProps";
 
 // Define a functional component called Component that takes in an object of props
 const Component: React.FC<IComponentProps> = ({
@@ -31,7 +31,8 @@ const Component: React.FC<IComponentProps> = ({
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
-			onClick={onClick}>
+			onClick={onClick}
+		>
 			{children}
 		</div>
 	);

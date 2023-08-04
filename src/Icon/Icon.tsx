@@ -1,6 +1,6 @@
-import React, {useState} from "react";
-import {StringBuilder} from "../Gizmos/StringBuilder";
-import {IIconProps} from "./IIconProps";
+import React, { useState } from "react";
+import { StringBuilder } from "../Gizmos/StringBuilder";
+import { IIconProps } from "./IIconProps";
 
 // Define the Icon component
 const Icon: React.FC<IIconProps> = ({
@@ -39,7 +39,8 @@ const Icon: React.FC<IIconProps> = ({
 			onMouseLeave={onMouseLeave}
 			onMouseMove={onMouseMove}
 			onClick={onClick}
-			className={_computedComponentClassName}>
+			className={_computedComponentClassName}
+		>
 			<span id={_id} className={_computedComponentIconClassName}>
 				{children}
 			</span>

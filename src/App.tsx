@@ -1,7 +1,7 @@
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import "./md3.css";
 import "./tinydex.css";
-import {Pokemon} from "./Pokemon";
+import { Pokemon } from "./Pokemon";
 import TextField from "./TextField/TextField";
 import Typography from "./Typography/Typography";
 import PokemonCarousel from "./PokemonCarousel/PokemonCarousel";
@@ -24,7 +24,7 @@ export default function App() {
 				"https://pokeapi.co/api/v2/pokemon?limit=1118"
 			);
 			const data = await response.json();
-			const names = data.results.map((result: {name: string}) => result.name);
+			const names = data.results.map((result: { name: string }) => result.name);
 			setAllPokemonNames(names);
 		};
 		fetchPokemonNames();
@@ -69,7 +69,9 @@ export default function App() {
 			)
 			.Sprite(pokeAPIData.sprites.other["official-artwork"].front_default)
 			.Types(
-				pokeAPIData.types.map((type: {type: {name: string}}) => type.type.name)
+				pokeAPIData.types.map(
+					(type: { type: { name: string } }) => type.type.name
+				)
 			);
 
 		setCurrentPokemonId(pokeAPIData.id); // set the current pokemon id and pokemon object
@@ -119,7 +121,8 @@ export default function App() {
 							// handle input changes and fetch the pokemon
 							setInputTerm((e.target as HTMLInputElement).value);
 							fetchPokemon((e.target as HTMLInputElement).value);
-						}}></TextField>
+						}}
+					></TextField>
 				</div>
 			</div>
 		</div>

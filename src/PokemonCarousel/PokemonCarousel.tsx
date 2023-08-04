@@ -67,8 +67,12 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 	// Render the component with the appropriate props and state
 	return (
 		<div id={id} className={_computedComponentClassName}>
-			<Typography variant="text-title-medium">#{pokemon?.id}</Typography>
-			<Typography variant="text-title-large">{pokemon?.name}</Typography>
+			<Typography variant="text-title-medium" className="pokemon-number">
+				#{pokemon?.id}
+			</Typography>
+			<Typography variant="text-title-large" className="pokemon-name">
+				{pokemon?.name}
+			</Typography>
 			<div className="pokemon-carousel-hero">
 				<Button
 					className="carousel-button"

@@ -64,7 +64,9 @@ export default function App() {
 
 		const pokemon = new Pokemon() // create a new Pokemon object with the fetched data
 			.Id(pokeAPIData.id)
-			.Name(pokeAPIData.name)
+			.Name(
+				pokeAPIData.name.charAt(0).toUpperCase() + pokeAPIData.name.slice(1)
+			)
 			.Sprite(pokeAPIData.sprites.other["official-artwork"].front_default)
 			.Types(
 				pokeAPIData.types.map((type: {type: {name: string}}) => type.type.name)
@@ -99,6 +101,7 @@ export default function App() {
 					handleNextPokemon={() => handlePokemonCycling(true)} // handle cycling to the next pokemon
 				/>
 				<TextField
+					className="pokemon-search-bar"
 					configuration="outlined"
 					textConfiguration="label-placeholder"
 					trailingIcon={false}

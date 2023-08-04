@@ -19,7 +19,10 @@ html {
 }
 
 .main-title {
-	margin-bottom: 4rem;
+	margin-left: 1rem;
+	font-size: 4rem;
+	color: #162c63;
+	align-self: flex-start;
 }
 
 .pokemon-carousel {
@@ -39,6 +42,12 @@ html {
 .carousel-button {
 	width: 8rem;
 	height: 8rem;
+	transform: translateY(12rem);
+}
+
+.carousel-button:hover {
+	scale: 1.05;
+	transition: scale 0.25s ease-in-out;
 }
 
 .carousel-button .text {
@@ -58,14 +67,24 @@ html {
 	transform: translateY(0rem);
 }
 
+.pokemon-name {
+	font-size: 4rem;
+	margin-bottom: 1rem;
+}
+
 .pokemon-types {
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 5rem;
 }
 
+.pokemon-number {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
 .text {
-	color: black;
+	color: #3c5aa6;
 }
 
 .type-icon {
@@ -76,4 +95,20 @@ html {
 
 .pokemon-type {
 	margin-right: 1rem;
+}
+
+.pokemon-search-bar {
+	width: 40rem;
+}
+
+.pokemon-search-bar:hover {
+	width: 42rem;
+}
+
+.text-field-content {
+	padding: 0;
+}
+
+.text-field-input {
+	text-align: center;
 }

@@ -30,8 +30,10 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 	const _typesComponent = pokemon?.types?.map((type, index) => {
 		return (
 			<React.Fragment key={index}>
-				<img src={`../../${type}_icon.png`} />
-				<Typography variant="text-title-large">{type}</Typography>
+				<img src={`../../${type}_icon.png`} className="type-icon" />
+				<Typography variant="text-title-large" className="pokemon-type">
+					{type}
+				</Typography>
 			</React.Fragment>
 		);
 	});

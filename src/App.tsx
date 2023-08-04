@@ -28,13 +28,16 @@ export default function App() {
 	const fetchPokemon = async (pokemonNameOrIdPartialSearchTerm: string) => {
 		if (pokemonNameOrIdPartialSearchTerm === "") return;
 
-		const pokemonMatchingName = allPokemonNames.find((name) =>
-			name
-				.toLowerCase()
-				.startsWith(pokemonNameOrIdPartialSearchTerm.toLowerCase())
-		);
-		if (pokemonMatchingName) {
-			pokemonNameOrIdPartialSearchTerm = pokemonMatchingName;
+		if (!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm)) {
+			const pokemonMatchingName = allPokemonNames.find((name) =>
+				name
+					.toLowerCase()
+					.startsWith(pokemonNameOrIdPartialSearchTerm.toLowerCase())
+			);
+
+			if (pokemonMatchingName) {
+				pokemonNameOrIdPartialSearchTerm = pokemonMatchingName;
+			}
 		}
 
 		if (

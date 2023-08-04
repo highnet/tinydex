@@ -1,5 +1,7 @@
 import {useState, useEffect} from "react";
 import {Pokemon} from "./Pokemon";
+import TextField from "./TextField/TextField";
+import Button from "./Button/Button";
 
 export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
@@ -39,9 +41,10 @@ export default function App() {
 		const pokemon = new Pokemon()
 			.Id(pokeAPIData.id)
 			.Name(pokeAPIData.name)
-			.Height(pokeAPIData.height)
-			.Weight(pokeAPIData.weight)
-			.Sprites(pokeAPIData.sprites);
+			.Sprites(pokeAPIData.sprites)
+			.Types(
+				pokeAPIData.types.map((type: {type: {name: string}}) => type.type.name)
+			);
 
 		setPokemonId(pokeAPIData.id);
 		setPokemon(pokemon);
@@ -49,6 +52,7 @@ export default function App() {
 
 	useEffect(() => {
 		fetchPokemon(pokemonId.toString());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pokemonId]);
 
 	const handleNextPokemon = () => {
@@ -69,24 +73,32 @@ export default function App() {
 
 	return (
 		<div className="App">
-			<h1>Pokedex</h1>
+			<h1>TinyDex</h1>
 
-			<input
-				type="text"
-				placeholder="Search for a Pokemon by name"
-				value={inputTerm}
+			<TextField
+				configuration="filled"
+				textConfiguration="label-placeholder"
+				leadingIconName="search"
+				trailingIcon={false}
+				validRegex={
+					"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" + pokemonNames.join("|") + ")$"
+				}
+				placeholder="Bulbasaur"
+				defaultValue={inputTerm}
+				label="Number/Name"
 				onChange={(e) => {
-					setInputTerm(e.target.value);
-					fetchPokemon(e.target.value);
-				}}
-			/>
-			<button onClick={handlePreviousPokemon}>Previous</button>
-			<button onClick={handleNextPokemon}>Next</button>
+					setInputTerm((e.target as HTMLInputElement).value);
+					fetchPokemon((e.target as HTMLInputElement).value);
+				}}></TextField>
+
+			<Button onClick={handlePreviousPokemon}>Previous</Button>
+			<Button onClick={handleNextPokemon}>Next</Button>
 
 			<div>
 				<img src={pokemon.sprites.front_default} alt="Pokemon Sprite" />
-				<h2>{pokemon.name}</h2>
-				<h1>{pokemon.id}</h1>
+				<h1>{pokemon.name}</h1>
+				<h2>{pokemon.id}</h2>
+				<h3>{pokemon.types.join(", ")}</h3>
 			</div>
 		</div>
 	);

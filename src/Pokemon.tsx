@@ -1,11 +1,10 @@
 export class Pokemon {
 	id: number = 0;
 	name: string = "";
-	height: number = 0;
-	weight: number = 0;
 	sprites: {
 		front_default: string;
 	} = {front_default: ""};
+	types: string[] = [];
 
 	Id(id: number): Pokemon {
 		this.id = id;
@@ -17,18 +16,13 @@ export class Pokemon {
 		return this;
 	}
 
-	Height(height: number): Pokemon {
-		this.height = height;
-		return this;
-	}
-
-	Weight(weight: number): Pokemon {
-		this.weight = weight;
-		return this;
-	}
-
 	Sprites(sprites: {front_default: string}): Pokemon {
 		this.sprites = sprites;
+		return this;
+	}
+
+	Types(types: string[]): Pokemon {
+		this.types = types;
 		return this;
 	}
 }

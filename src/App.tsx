@@ -5,24 +5,46 @@ export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
 	const [pokemon, setPokemon] = useState(new Pokemon());
 	const [pokemonId, setPokemonId] = useState(1);
+	const [pokemonNames, setPokemonNames] = useState<string[]>([]);
 
-	const fetchPokemon = async (pokemonSearchTerm: string) => {
-		if (pokemonSearchTerm === "") return;
+	useEffect(() => {
+		const fetchPokemonNames = async () => {
+			const response = await fetch(
+				"https://pokeapi.co/api/v2/pokemon?limit=1118"
+			);
+			const data = await response.json();
+			const names = data.results.map((result: {name: string}) => result.name);
+			setPokemonNames(names);
+		};
+		fetchPokemonNames();
+	}, []);
 
-		const response = await fetch(
-			`https://pokeapi.co/api/v2/pokemon/${pokemonSearchTerm}`
+	const fetchPokemon = async (pokemonNameOrIdPartialSearchTerm: string) => {
+		if (pokemonNameOrIdPartialSearchTerm === "") return;
+
+		const pokemonMatchingName = pokemonNames.find((name) =>
+			name
+				.toLowerCase()
+				.startsWith(pokemonNameOrIdPartialSearchTerm.toLowerCase())
 		);
-		const data = await response.json();
+		if (pokemonMatchingName) {
+			pokemonNameOrIdPartialSearchTerm = pokemonMatchingName;
+		}
 
-		const newPokemon = new Pokemon()
-			.Id(data.id)
-			.Name(data.name)
-			.Height(data.height)
-			.Weight(data.weight)
-			.Sprites(data.sprites);
+		const pokeAPIResponse = await fetch(
+			`https://pokeapi.co/api/v2/pokemon/${pokemonNameOrIdPartialSearchTerm}`
+		);
+		const pokeAPIData = await pokeAPIResponse.json();
 
-		setPokemonId(data.id);
-		setPokemon(newPokemon);
+		const pokemon = new Pokemon()
+			.Id(pokeAPIData.id)
+			.Name(pokeAPIData.name)
+			.Height(pokeAPIData.height)
+			.Weight(pokeAPIData.weight)
+			.Sprites(pokeAPIData.sprites);
+
+		setPokemonId(pokeAPIData.id);
+		setPokemon(pokemon);
 	};
 
 	useEffect(() => {

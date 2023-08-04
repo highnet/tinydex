@@ -95,30 +95,32 @@ export default function App() {
 				<Typography variant="text-headline-large" className="main-title">
 					TinyDex
 				</Typography>
-				<PokemonCarousel
-					pokemon={currentPokemon} // display the current pokemon in the carousel
-					handlePreviousPokemon={() => handlePokemonCycling(false)} // handle cycling to the previous pokemon
-					handleNextPokemon={() => handlePokemonCycling(true)} // handle cycling to the next pokemon
-				/>
-				<TextField
-					className="pokemon-search-bar"
-					configuration="outlined"
-					textConfiguration="label-placeholder"
-					trailingIcon={false}
-					validRegex={
-						// validate the input with the regex
-						"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" +
-						allPokemonNames.join("|") +
-						")$"
-					}
-					placeholder="Bulbasaur"
-					defaultValue={inputTerm}
-					label=" "
-					onChange={(e) => {
-						// handle input changes and fetch the pokemon
-						setInputTerm((e.target as HTMLInputElement).value);
-						fetchPokemon((e.target as HTMLInputElement).value);
-					}}></TextField>
+				<div className="tinydex-content">
+					<PokemonCarousel
+						pokemon={currentPokemon} // display the current pokemon in the carousel
+						handlePreviousPokemon={() => handlePokemonCycling(false)} // handle cycling to the previous pokemon
+						handleNextPokemon={() => handlePokemonCycling(true)} // handle cycling to the next pokemon
+					/>
+					<TextField
+						className="pokemon-search-bar"
+						configuration="outlined"
+						textConfiguration="label-placeholder"
+						trailingIcon={false}
+						validRegex={
+							// validate the input with the regex
+							"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" +
+							allPokemonNames.join("|") +
+							")$"
+						}
+						placeholder="Bulbasaur"
+						defaultValue={inputTerm}
+						label=" "
+						onChange={(e) => {
+							// handle input changes and fetch the pokemon
+							setInputTerm((e.target as HTMLInputElement).value);
+							fetchPokemon((e.target as HTMLInputElement).value);
+						}}></TextField>
+				</div>
 			</div>
 		</div>
 	);

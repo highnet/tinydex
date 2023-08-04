@@ -83,7 +83,7 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 				<img
 					src={pokemon?.sprite}
 					alt="Pokemon Sprite"
-					className={isFadingOut ? "fade-out" : "fade-in"}
+					className={"pokemon-sprite " + (isFadingOut ? "fade-out" : "fade-in")}
 				/>
 				<Button
 					className="carousel-button"

@@ -32,6 +32,30 @@ html {
 	justify-content: center;
 }
 
+.tinydex-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+@media screen and (max-width: 768px) {
+	.tinydex-content {
+		margin: 0;
+		transform: translateY(-30%) scale(0.4);
+	}
+
+	.main-title {
+		transform: translateX(-30%) translateY(-30%) scale(0.4);
+	}
+}
+
+.text {
+	color: #3c5aa6;
+}
+
 .pokemon-carousel-hero {
 	display: flex;
 	flex-direction: row;
@@ -72,19 +96,15 @@ html {
 	margin-bottom: 1rem;
 }
 
-.pokemon-types {
-	display: flex;
-	flex-direction: row;
-	margin-bottom: 5rem;
-}
-
 .pokemon-number {
 	font-size: 3rem;
 	margin-bottom: 1rem;
 }
 
-.text {
-	color: #3c5aa6;
+.pokemon-types {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 5rem;
 }
 
 .type-icon {

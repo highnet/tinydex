@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vitest && vite",
+    "dev": "vitest --run && vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "vitest"
+    "test": "vitest",
+    "deploy": "tsc && vite build && firebase deploy"
   },
   "dependencies": {
     "react": "^18.2.0",

@@ -11,9 +11,11 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 	handleNextPokemon,
 	pokemon,
 }) => {
+	// State variables for fading animation and button cooldown
 	const [isFadingOut, setIsFadingOut] = useState(false);
 	const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+	// Effect to trigger fading animation when the pokemon changes
 	useEffect(() => {
 		setIsFadingOut(true);
 		const timeoutId = setTimeout(() => {
@@ -22,12 +24,14 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 		return () => clearTimeout(timeoutId);
 	}, [pokemon?.id]);
 
+	// Build the component class name based on props and default classes
 	const _computedComponentClassName = new StringBuilder()
 		.add("pokemon-carousel")
 		.add("pokemon-carousel-light-theme")
 		.add(className || "")
 		.toString();
 
+	// Map the pokemon types to a component for rendering
 	const _typesComponent = pokemon?.types?.map((type, index) => {
 		return (
 			<React.Fragment key={index}>
@@ -39,6 +43,7 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 		);
 	});
 
+	// Handlers for previous/next pokemon with a 1 second cooldown
 	const handlePreviousPokemonWithCooldown = () => {
 		if (!isButtonDisabled) {
 			setIsButtonDisabled(true);
@@ -59,6 +64,7 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 		}
 	};
 
+	// Render the component with the appropriate props and state
 	return (
 		<div id={id} className={_computedComponentClassName}>
 			<Typography variant="text-title-medium">#{pokemon?.id}</Typography>

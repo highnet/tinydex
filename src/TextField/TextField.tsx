@@ -1,3 +1,4 @@
+// Import necessary dependencies
 import React, {useRef, useState} from "react";
 import {StringBuilder} from "../Gizmos/StringBuilder";
 import {ITextFieldProps} from "./ITextFieldProps";
@@ -5,6 +6,7 @@ import Typography from "../Typography/Typography";
 import Icon from "../Icon/Icon";
 import IconButton from "../IconButton/IconButton";
 
+// Define the TextField component
 const TextField: React.FC<ITextFieldProps> = ({
 	disabled,
 	className,
@@ -23,9 +25,11 @@ const TextField: React.FC<ITextFieldProps> = ({
 	validRegex = "^*$",
 	onChange,
 }) => {
+	// Create refs for the input and component
 	const inputRef = useRef<HTMLInputElement>(null);
 	const componentRef = useRef<HTMLDivElement>(null);
 
+	// Define state variables
 	const [_disabled] = useState(disabled || false);
 	const [_className] = useState(className || "");
 	const [_configuration] = useState(configuration);
@@ -40,6 +44,7 @@ const TextField: React.FC<ITextFieldProps> = ({
 	const [_isValidInput, setIsValidInput] = useState(true);
 	const [_children] = useState(children || undefined);
 
+	// Compute the component class name
 	const _computedComponentClassName = new StringBuilder()
 		.add("text-field")
 		.add("text-field-light-theme")
@@ -50,12 +55,14 @@ const TextField: React.FC<ITextFieldProps> = ({
 		.add(_className)
 		.toString();
 
+	// Reset the text field value
 	const handleResetTextFieldValue = () => {
 		if (inputRef.current) {
 			inputRef.current.value = "";
 		}
 	};
 
+	// Handle focus on the text field
 	const handleFocus = () => {
 		if (!_defaultValueResetted) {
 			handleResetTextFieldValue();
@@ -65,6 +72,7 @@ const TextField: React.FC<ITextFieldProps> = ({
 		componentRef.current?.classList.add("text-field-active");
 	};
 
+	// Handle blur on the text field
 	const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
 		setIsFocused(false);
 		componentRef.current?.classList.remove("text-field-active");
@@ -73,17 +81,20 @@ const TextField: React.FC<ITextFieldProps> = ({
 		componentRef.current?.classList.toggle("text-field-error", !isValidInput);
 	};
 
+	// Handle key down on the text field
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
 			inputRef.current?.blur();
 		}
 	};
 
+	// Validate the input value
 	const validateInput = (value: string, regex: string): boolean => {
 		const pattern = new RegExp(regex);
 		return pattern.test(value);
 	};
 
+	// Render the TextField component
 	return (
 		<div>
 			<div
@@ -162,4 +173,5 @@ const TextField: React.FC<ITextFieldProps> = ({
 	);
 };
 
+// Export the TextField component
 export default TextField;

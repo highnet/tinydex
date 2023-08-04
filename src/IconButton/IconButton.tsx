@@ -3,6 +3,7 @@ import {StringBuilder} from "../Gizmos/StringBuilder";
 import {IIconButtonProps} from "./IIconButtonProps";
 import Icon from "../Icon/Icon";
 
+// Define the IconButton component
 const IconButton: React.FC<IIconButtonProps> = ({
 	className,
 	id,
@@ -17,12 +18,14 @@ const IconButton: React.FC<IIconButtonProps> = ({
 	selected,
 	onValueChange,
 }) => {
+	// Define state variables for class name, ID, configuration, toggle able, and selected props
 	const [_className] = useState(className || "");
 	const [_id] = useState(id || undefined);
 	const [_configuration] = useState(configuration || "standard");
 	const [_toggleAble] = useState(toggleAble || false);
 	const [_selected, setSelected] = useState(selected || false);
 
+	// Compute the class name for the component
 	const _computedComponentClassName = new StringBuilder()
 		.add("icon-button")
 		.add("icon-button-light-theme")
@@ -33,6 +36,7 @@ const IconButton: React.FC<IIconButtonProps> = ({
 		.add(_className)
 		.toString();
 
+	// Define the click event handler
 	const handleClick = () => {
 		if (_toggleAble) {
 			setSelected(!_selected);
@@ -42,6 +46,7 @@ const IconButton: React.FC<IIconButtonProps> = ({
 		}
 	};
 
+	// Render the component
 	return (
 		<div
 			id={_id}
@@ -60,4 +65,5 @@ const IconButton: React.FC<IIconButtonProps> = ({
 	);
 };
 
+// Export the IconButton component as the default export
 export default IconButton;

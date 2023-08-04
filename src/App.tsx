@@ -5,17 +5,21 @@ import {Pokemon} from "./Pokemon";
 import TextField from "./TextField/TextField";
 import Typography from "./Typography/Typography";
 import PokemonCarousel from "./PokemonCarousel/PokemonCarousel";
-import {handlePokemonCycle, partialPokemonNameSearch} from "./pokemonUtils";
+import {
+	handlePokemonCycle,
+	partialPokemonNameSearch,
+} from "./Gizmos/PokemonUtils";
 
 export default function App() {
 	const [inputTerm, setInputTerm] = useState("");
 	const [currentPokemon, setCurrentPokemon] = useState(new Pokemon());
 	const [currentPokemonId, setCurrentPokemonId] = useState(1);
 	const [allPokemonNames, setAllPokemonNames] = useState<string[]>([]);
-	const maxPokemonId = 1010;
+	const maxPokemonId = 1010; // maximum pokemon id
 
 	useEffect(() => {
 		const fetchPokemonNames = async () => {
+			// fetches all pokemon names
 			const response = await fetch(
 				"https://pokeapi.co/api/v2/pokemon?limit=1118"
 			);
@@ -27,9 +31,11 @@ export default function App() {
 	}, []);
 
 	const fetchPokemon = async (pokemonNameOrIdPartialSearchTerm: string) => {
+		// fetches a pokemon based on name or id
 		if (pokemonNameOrIdPartialSearchTerm === "") return;
 
 		if (!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm)) {
+			// if the input is not a pokemon name, try to find a matching name
 			const pokemonMatchingName = partialPokemonNameSearch(
 				allPokemonNames,
 				pokemonNameOrIdPartialSearchTerm
@@ -40,21 +46,23 @@ export default function App() {
 			}
 		}
 
-		const validRegex = new RegExp(
+		const validRegex = new RegExp( // regex to validate the input
 			`^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(${allPokemonNames.join("|")})$`
 		);
 
 		if (!validRegex.test(pokemonNameOrIdPartialSearchTerm)) {
+			// if the input is not valid, return
 			return;
 		}
 
 		const pokeAPIResponse = await fetch(
+			// fetch the pokemon data from the API
 			`https://pokeapi.co/api/v2/pokemon/${pokemonNameOrIdPartialSearchTerm}`
 		);
 
 		const pokeAPIData = await pokeAPIResponse.json();
 
-		const pokemon = new Pokemon()
+		const pokemon = new Pokemon() // create a new Pokemon object with the fetched data
 			.Id(pokeAPIData.id)
 			.Name(pokeAPIData.name)
 			.Sprite(pokeAPIData.sprites.other["official-artwork"].front_default)
@@ -62,16 +70,18 @@ export default function App() {
 				pokeAPIData.types.map((type: {type: {name: string}}) => type.type.name)
 			);
 
-		setCurrentPokemonId(pokeAPIData.id);
+		setCurrentPokemonId(pokeAPIData.id); // set the current pokemon id and pokemon object
 		setCurrentPokemon(pokemon);
 	};
 
 	useEffect(() => {
+		// fetch the pokemon when the current pokemon id changes
 		fetchPokemon(currentPokemonId.toString());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPokemonId]);
 
 	const handlePokemonCycling = (isNext: boolean) => {
+		// function to handle cycling through pokemon
 		setCurrentPokemonId((prevPokemonId) =>
 			handlePokemonCycle(prevPokemonId, maxPokemonId, isNext)
 		);
@@ -84,15 +94,16 @@ export default function App() {
 					TinyDex
 				</Typography>
 				<PokemonCarousel
-					pokemon={currentPokemon}
-					handlePreviousPokemon={() => handlePokemonCycling(false)}
-					handleNextPokemon={() => handlePokemonCycling(true)}
+					pokemon={currentPokemon} // display the current pokemon in the carousel
+					handlePreviousPokemon={() => handlePokemonCycling(false)} // handle cycling to the previous pokemon
+					handleNextPokemon={() => handlePokemonCycling(true)} // handle cycling to the next pokemon
 				/>
 				<TextField
 					configuration="outlined"
 					textConfiguration="label-placeholder"
 					trailingIcon={false}
 					validRegex={
+						// validate the input with the regex
 						"^$|^([1-9]|[1-9][0-9]{0,2}|1010)$|^(" +
 						allPokemonNames.join("|") +
 						")$"
@@ -101,6 +112,7 @@ export default function App() {
 					defaultValue={inputTerm}
 					label=" "
 					onChange={(e) => {
+						// handle input changes and fetch the pokemon
 						setInputTerm((e.target as HTMLInputElement).value);
 						fetchPokemon((e.target as HTMLInputElement).value);
 					}}></TextField>

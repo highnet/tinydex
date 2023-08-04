@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import "./md3.css";
 import "./tinydex.css";
 import {Pokemon} from "./Pokemon";
 import TextField from "./TextField/TextField";
@@ -36,9 +37,20 @@ export default function App() {
 			pokemonNameOrIdPartialSearchTerm = pokemonMatchingName;
 		}
 
+		if (
+			pokemonNameOrIdPartialSearchTerm === "" ||
+			(!allPokemonNames.includes(pokemonNameOrIdPartialSearchTerm) &&
+				(isNaN(Number(pokemonNameOrIdPartialSearchTerm)) ||
+					Number(pokemonNameOrIdPartialSearchTerm) < 1 ||
+					Number(pokemonNameOrIdPartialSearchTerm) > maxPokemonId))
+		) {
+			return;
+		}
+
 		const pokeAPIResponse = await fetch(
 			`https://pokeapi.co/api/v2/pokemon/${pokemonNameOrIdPartialSearchTerm}`
 		);
+
 		const pokeAPIData = await pokeAPIResponse.json();
 
 		const pokemon = new Pokemon()
@@ -77,7 +89,7 @@ export default function App() {
 	return (
 		<div className="App">
 			<div className="tinydex">
-				<Typography variant="text-title-large" className="main-title">
+				<Typography variant="text-headline-large" className="main-title">
 					TinyDex
 				</Typography>
 				<PokemonCarousel
@@ -96,7 +108,7 @@ export default function App() {
 					}
 					placeholder="Bulbasaur"
 					defaultValue={inputTerm}
-					label="Number/Name"
+					label=" "
 					onChange={(e) => {
 						setInputTerm((e.target as HTMLInputElement).value);
 						fetchPokemon((e.target as HTMLInputElement).value);

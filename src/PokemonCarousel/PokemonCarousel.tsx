@@ -27,14 +27,19 @@ const PokemonCarousel: React.FC<IPokemonCarouselProps> = ({
 		.add(className || "")
 		.toString();
 
-	const _typesComponent = pokemon?.types?.map((type) => {
-		return <Typography variant="text-body-medium">{type}</Typography>;
+	const _typesComponent = pokemon?.types?.map((type, index) => {
+		return (
+			<React.Fragment key={index}>
+				<img src={`../../${type}_icon.png`} />
+				<Typography variant="text-title-large">{type}</Typography>
+			</React.Fragment>
+		);
 	});
 
 	return (
 		<div id={id} className={_computedComponentClassName}>
-			<Typography variant="text-body-medium">{pokemon?.id}</Typography>
-			<Typography variant="text-body-medium">{pokemon?.name}</Typography>
+			<Typography variant="text-title-medium">#{pokemon?.id}</Typography>
+			<Typography variant="text-title-large">{pokemon?.name}</Typography>
 			<div className="pokemon-carousel-hero">
 				<Button className="carousel-button" onClick={handlePreviousPokemon}>
 					←

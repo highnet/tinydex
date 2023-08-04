@@ -1,0 +1,1083 @@
+/* ==========TYPOGRAPHY========== */
+
+.text,
+.text-display,
+.text-headline,
+.text-title-large,
+.text-label,
+.text-body {
+	font-family: "Pokemon Solid", sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.1rem;
+}
+
+.text-display {
+	font-size: 5.7rem;
+	line-height: 6.4rem;
+	letter-spacing: -0.025rem;
+}
+
+.text-display-large {
+	font-size: 5.7rem;
+	line-height: 6.4rem;
+	letter-spacing: -0.025rem;
+}
+
+.text-display-medium {
+	font-size: 4.5rem;
+	line-height: 5.2rem;
+}
+
+.text-display-small {
+	font-size: 3.6rem;
+	line-height: 4.4rem;
+}
+
+.text-headline {
+	font-weight: 40rem;
+}
+
+.text-headline-large {
+	font-size: 3.2rem;
+	line-height: 4rem;
+}
+
+.text-headline-medium {
+	font-size: 2.8rem;
+	line-height: 3.6rem;
+}
+
+.text-headline-small {
+	font-size: 2.4rem;
+	line-height: 3.2rem;
+}
+
+.text-title-large {
+	font-size: 2.2rem;
+	line-height: 2.8rem;
+}
+
+.text-title-medium {
+	font-weight: 500;
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	letter-spacing: 0.015rem;
+}
+
+.text-title-small {
+	font-weight: 500;
+	font-size: 1.4rem;
+	line-height: 2rem;
+	letter-spacing: 0.01rem;
+}
+
+.text-label,
+.text-label-large,
+.text-label-medium,
+.text-label-small {
+	font-weight: 500;
+}
+
+.text-label-large {
+	font-size: 1.4rem;
+	line-height: 2rem;
+	letter-spacing: 0.01rem;
+}
+
+.text-label-medium {
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+}
+
+.text-label-small {
+	font-size: 1.1rem;
+	line-height: 1.6rem;
+}
+
+.text-body,
+.text-body-large,
+.text-body-medium,
+.text-body-small {
+	font-weight: 400;
+}
+
+.text-body-large {
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	letter-spacing: 0.05rem;
+}
+
+.text-body-medium {
+	font-size: 1.4rem;
+	line-height: 2rem;
+	letter-spacing: 0.025rem;
+}
+
+.text-body-small {
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+	letter-spacing: 0.04rem;
+}
+
+/* ==========BUTTONS==========*/
+
+.button {
+	box-sizing: border-box;
+	display: flex;
+	gap: 0.8rem;
+	padding: 0rem 1.6rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	border-radius: 10rem;
+	transition: background-color 0.3s, box-shadow 0.3s;
+	border: 0;
+	width: fit-content;
+	height: 4rem;
+	white-space: nowrap;
+}
+
+.button text {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	letter-spacing: 0.01rem;
+}
+
+.button-with-icon {
+	flex-direction: row;
+	padding: 0rem 0.9rem;
+	gap: 0.8rem;
+}
+
+.button-text {
+	background-color: transparent;
+	padding: 1rem 1.2rem;
+}
+
+.button-disabled {
+	opacity: 38%;
+	pointer-events: none;
+}
+
+.button-tonal:focus {
+	box-shadow: none;
+}
+
+.button-tonal:active {
+	box-shadow: none;
+}
+
+/* BUTTONS / LIGHT THEME */
+.button-filled.button-light-theme {
+	background-color: var(--m3-sys-light-primary);
+}
+
+.button-filled.button-light-theme > * {
+	color: var(--m3-sys-light-on-primary);
+}
+
+.button-filled:hover.button-light-theme,
+.button-filled:focus.button-light-theme,
+.button-filled:active.button-light-theme {
+	box-shadow: none;
+}
+.button-filled:hover.button-light-theme {
+	background-color: var(
+		--m3-composite-light-primary-passthrough-on-primary-opacity-08
+	);
+	box-shadow: var(--m3-elevation-light-1);
+}
+.button-filled:focus.button-light-theme {
+	background-color: var(
+		--m3-composite-light-primary-passthrough-on-primary-opacity-12
+	);
+}
+.button-filled:active.button-light-theme {
+	background-color: var(
+		--m3-composite-light-primary-passthrough-on-primary-opacity-12
+	);
+}
+
+.button-outlined.button-light-theme {
+	background-color: var(--m3-sys-light-surface);
+	border: 0.1rem solid var(--m3-sys-light-outline);
+}
+
+.button-outlined.button-light-theme > * {
+	color: var(--m3-sys-light-primary);
+}
+
+.button-outlined:hover.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-08);
+}
+.button-outlined:active.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-12);
+}
+.button-outlined:focus.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-12);
+	border: 0.1rem solid var(--m3-sys-light-primary);
+}
+
+.button-text.button-light-theme > * {
+	color: var(--m3-sys-light-primary);
+}
+
+.button-text.button-with-icon {
+	padding: 1rem 1.6rem 1rem 1.2rem;
+}
+
+.button-text:hover.button-light-theme,
+.button-text:focus.button-light-theme,
+.button-text:active.button-light-theme {
+	background-color: none;
+}
+.button-text:hover.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-08);
+}
+.button-text:focus.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-12);
+}
+.button-text:active.button-light-theme {
+	background-color: var(--m3-state-layers-light-primary-opacity-12);
+}
+
+.button-elevated.button-light-theme {
+	background-color: var(--m3-sys-light-surface-container-low);
+	box-shadow: var(--m3-elevation-light-1);
+}
+
+.button-elevated.button-light-theme > * {
+	color: var(--m3-sys-light-primary);
+}
+
+.button-elevated:hover.button-light-theme {
+	background-color: var(
+		--m3-composite-light-surface-container-low-passthrough-primary-opacity-08
+	);
+	box-shadow: var(--m3-elevation-light-2);
+}
+.button-elevated:focus.button-light-theme {
+	background-color: var(
+		--m3-composite-light-surface-container-low-passthrough-primary-opacity-08
+	);
+	box-shadow: var(--m3-elevation-light-1);
+}
+.button-elevated:active.button-light-theme {
+	background-color: var(
+		--m3-composite-light-surface-container-low-passthrough-primary-opacity-12
+	);
+	box-shadow: var(--m3-elevation-light-1);
+}
+
+.button-tonal.button-light-theme {
+	background-color: var(--m3-sys-light-secondary-container);
+}
+
+.button-tonal.button-light-theme > * {
+	color: var(--m3-sys-light-on-secondary-container);
+}
+
+.button-tonal:hover.button-light-theme {
+	background-color: var(
+		--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-08
+	);
+	box-shadow: var(--m3-elevation-light-1);
+}
+.button-tonal:focus.button-light-theme {
+	background-color: var(
+		--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-12
+	);
+}
+.button-tonal:active.button-light-theme {
+	background-color: var(
+		--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-12
+	);
+}
+
+/* ==========ICONS========== */
+
+.material-symbols {
+	user-select: none;
+	pointer-events: none;
+	font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.material-symbols-filled {
+	font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 20;
+}
+
+.icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* ==========TEXT FIELDS ========== */
+
+.text-field {
+	display: flex;
+	flex-direction: column;
+	width: 21rem;
+	min-height: 5.6rem;
+	transition: all 0.4s ease-in-out;
+}
+
+.icon-on-text-field {
+	width: 4.8rem;
+	height: 5.6rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.text-field-content {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	width: 0rem;
+	padding: 0.4rem 0rem 0.4rem 1.6rem;
+}
+
+.text-field-input {
+	font-family: "Pokemon Solid", sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 1.6rem;
+	line-height: 2.4rem;
+	letter-spacing: 0.05rem;
+	border: none;
+	background-color: transparent;
+	flex: 1;
+	padding: 0;
+}
+
+.text-field-container {
+	display: flex;
+	flex: 1;
+}
+
+.text-field-active-indicator {
+	width: 21rem;
+	height: 0.1rem;
+}
+
+.text-field > * {
+	text-align: left;
+}
+
+.text-field-with-leading-icon > div > .text-field-content {
+	padding-left: 0rem;
+}
+
+.text-field-filled {
+	border-radius: 0.4rem 0.4rem 0rem 0rem;
+}
+
+.text-field-disabled {
+	pointer-events: none;
+	opacity: 38%;
+}
+
+.text-field-outlined {
+	border-radius: 0.4rem;
+}
+
+.label-on-text-field-outlined {
+	position: absolute;
+	transform: translate(1.5rem, -0.9rem);
+	padding: 0rem 0.5rem 0rem 0.5rem;
+}
+
+.text-field-active-indicator {
+	transition: all 0.2s ease-in-out;
+	height: 0.1rem;
+	border: none;
+	box-shadow: none;
+	transform: translateY(-0.1rem);
+}
+
+.text-field-active-indicator-error,
+.text-field-active-indicator-active {
+	height: 0.2rem;
+	border: none;
+	transform: translateY(-0.2rem);
+}
+
+.text-field-supporting-text {
+	text-align: left;
+}
+
+.text-field-supporting-text.text-field-supporting-text-light-theme {
+	padding: 0.4rem 1.6rem 0rem 1.6rem;
+}
+
+.icon-button.trailing-icon-on-text-field {
+	height: 5.6rem;
+}
+
+/* TEXT FIELDS / LIGHT */
+
+.text-field-light-theme.text-field-error .label-on-text-field {
+	color: var(--m3-sys-light-error);
+}
+
+.text-field-light-theme.text-field-error .trailing-icon-on-text-field {
+	color: var(--m3-sys-light-error);
+}
+
+.text-field-light-theme .icon-on-text-field {
+	color: var(--m3-sys-light-on-surface-variant);
+}
+
+.text-field-light-theme .label-on-text-field-outlined {
+	background-color: var(--m3-sys-light-surface);
+}
+
+.text-field-light-theme .text-field-input {
+	color: var(--m3-sys-light-on-surface);
+}
+
+.text-field-light-theme .label-on-text-field {
+	color: var(--m3-sys-light-on-surface);
+}
+
+.text-field-outlined:hover.text-field-light-theme {
+	box-shadow: inset 0 0 0 0.2rem var(--m3-sys-light-on-surface);
+}
+
+.text-field-outlined.text-field-error.text-field-light-theme {
+	box-shadow: inset 0 0 0 0.2rem var(--m3-sys-light-error) !important;
+}
+
+.text-field-outlined.text-field-active.text-field-light-theme {
+	box-shadow: inset 0 0 0 0.2rem var(--m3-sys-light-primary) !important;
+}
+
+.text-field-outlined.text-field-light-theme {
+	box-shadow: inset 0 0 0 0.1rem var(--m3-sys-light-outline);
+	background-color: var(--m3-sys-light-surface);
+}
+
+.text-field-filled.text-field-light-theme {
+	background-color: var(--m3-sys-light-surface-container-highest);
+}
+
+.text-field-filled:hover.text-field-light-theme {
+	background-color: var(
+		--m3-composite-light-surface-container-highest-passthrough-on-surface-opacity-08
+	);
+}
+
+.text-field-active-indicator.text-field-active-indicator-light-theme {
+	box-shadow: inset 0 0 0 0.1rem var(--m3-sys-light-on-surface-variant);
+}
+.text-field-active-indicator-active.text-field-active-indicator-light-theme {
+	box-shadow: inset 0 0 0 0.1rem var(--m3-sys-light-primary);
+}
+
+.text-field-active-indicator-error.text-field-active-indicator-light-theme {
+	box-shadow: inset 0 0 0 0.1rem var(--m3-sys-light-error);
+}
+
+:root {
+	/* MD3 */
+	--m3-white: #ffffff;
+	--m3-black: #000000;
+
+	/* MD3 / TONAL / REFERENCE / PRIMARY */
+	--m3-ref-primary-primary0: #000000;
+	--m3-ref-primary-primary10: #21005d;
+	--m3-ref-primary-primary20: #381e72;
+	--m3-ref-primary-primary30: #4f378b;
+	--m3-ref-primary-primary40: #6750a4;
+	--m3-ref-primary-primary50: #7f67be;
+	--m3-ref-primary-primary60: #9a82db;
+	--m3-ref-primary-primary70: #b69df8;
+	--m3-ref-primary-primary80: #d0bcff;
+	--m3-ref-primary-primary90: #eaddff;
+	--m3-ref-primary-primary95: #f6edff;
+	--m3-ref-primary-primary99: #fffbfe;
+	--m3-ref-primary-primary100: #000000;
+
+	/* MD3 / TONAL / REFERENCE / SECONDARY */
+	--m3-ref-secondary-secondary0: #000000;
+	--m3-ref-secondary-secondary10: #1d192b;
+	--m3-ref-secondary-secondary20: #332d41;
+	--m3-ref-secondary-secondary30: #4a4458;
+	--m3-ref-secondary-secondary40: #625b71;
+	--m3-ref-secondary-secondary50: #7a7289;
+	--m3-ref-secondary-secondary60: #958da5;
+	--m3-ref-secondary-secondary70: #b0a7c0;
+	--m3-ref-secondary-secondary80: #ccc2dc;
+	--m3-ref-secondary-secondary90: #e8def8;
+	--m3-ref-secondary-secondary95: #f6edff;
+	--m3-ref-secondary-secondary99: #fffbfe;
+	--m3-ref-secondary-secondary100: #ffffff;
+
+	/* MD3 / TONAL / REFERENCE / TERTIARY */
+	--m3-ref-tertiary-tertiary0: #000000;
+	--m3-ref-tertiary-tertiary10: #31111d;
+	--m3-ref-tertiary-tertiary20: #492532;
+	--m3-ref-tertiary-tertiary30: #633b48;
+	--m3-ref-tertiary-tertiary40: #7d5260;
+	--m3-ref-tertiary-tertiary50: #986977;
+	--m3-ref-tertiary-tertiary60: #b58392;
+	--m3-ref-tertiary-tertiary70: #d29dac;
+	--m3-ref-tertiary-tertiary80: #efb8c8;
+	--m3-ref-tertiary-tertiary90: #ffd8e4;
+	--m3-ref-tertiary-tertiary95: #ffecf1;
+	--m3-ref-tertiary-tertiary99: #fffbfa;
+	--m3-ref-tertiary-tertiary100: #ffffff;
+
+	/* MD3 / TONAL / REFERENCE / ERROR */
+	--m3-ref-error-error0: #000000;
+	--m3-ref-error-error10: #410e0b;
+	--m3-ref-error-error20: #601410;
+	--m3-ref-error-error30: #8c1d18;
+	--m3-ref-error-error40: #b3261e;
+	--m3-ref-error-error50: #dc362e;
+	--m3-ref-error-error60: #e46962;
+	--m3-ref-error-error70: #ec928e;
+	--m3-ref-error-error80: #f2b8b5;
+	--m3-ref-error-error90: #f9dedc;
+	--m3-ref-error-error95: #fceeee;
+	--m3-ref-error-error99: #fffbf9;
+	--m3-ref-error-error100: #ffffff;
+
+	/* MD3 / TONAL / REFERENCE / NEUTRAL */
+	--m3-ref-neutral-neutral0: #000000;
+	--m3-ref-neutral-neutral10: #1d1b20;
+	--m3-ref-neutral-neutral20: #48464c;
+	--m3-ref-neutral-neutral30: #48464c;
+	--m3-ref-neutral-neutral40: #605d64;
+	--m3-ref-neutral-neutral50: #79767d;
+	--m3-ref-neutral-neutral60: #938f96;
+	--m3-ref-neutral-neutral70: #aea9b1;
+	--m3-ref-neutral-neutral80: #cac5cd;
+	--m3-ref-neutral-neutral90: #e6e0e9;
+	--m3-ref-neutral-neutral95: #f5eff7;
+	--m3-ref-neutral-neutral99: #fffbfe;
+	--m3-ref-neutral-neutral100: #ffffff;
+
+	/* MD3 / TONAL / REFERENCE / NEUTRAL VARIANT */
+	--m3-ref-neutral-variant-neutral-variant0: #000000;
+	--m3-ref-neutral-variant-neutral-variant10: #1d1a22;
+	--m3-ref-neutral-variant-neutral-variant20: #322f37;
+	--m3-ref-neutral-variant-neutral-variant30: #49454f;
+	--m3-ref-neutral-variant-neutral-variant40: #605d66;
+	--m3-ref-neutral-variant-neutral-variant50: #79747e;
+	--m3-ref-neutral-variant-neutral-variant60: #938f99;
+	--m3-ref-neutral-variant-neutral-variant70: #aea9b4;
+	--m3-ref-neutral-variant-neutral-variant80: #cac4d0;
+	--m3-ref-neutral-variant-neutral-variant90: #e7e0ec;
+	--m3-ref-neutral-variant-neutral-variant95: #f5eefa;
+	--m3-ref-neutral-variant-neutral-variant99: #fffbfe;
+	--m3-ref-neutral-variant-neutral-variant100: #ffffff;
+
+	/* MD3 / LIGHT / PRIMARY */
+	--m3-sys-light-primary: #6750a4;
+	--m3-sys-light-on-primary: #ffffff;
+	--m3-sys-light-primary-container: #eaddff;
+	--m3-sys-light-on-primary-container: #21005d;
+	--m3-sys-light-primary-fixed: #eaddff;
+	--m3-sys-light-on-primary-fixed: #21005d;
+	--m3-sys-light-primary-fixed-dim: #d0bcff;
+	--m3-sys-light-on-primary-fixed-variant: #4f378b;
+
+	/* MD3 / LIGHT / SECONDARY */
+	--m3-sys-light-secondary: #625b71;
+	--m3-sys-light-on-secondary: #ffffff;
+	--m3-sys-light-secondary-container: #e8def8;
+	--m3-sys-light-on-secondary-container: #1d192b;
+	--m3-sys-light-secondary-fixed: #e8def8;
+	--m3-sys-light-on-secondary-fixed: #1d192b;
+	--m3-sys-light-secondary-fixed-dim: #ccc2dc;
+	--m3-sys-light-on-secondary-fixed-variant: #4a4458;
+
+	/* MD3 / LIGHT / TERTIARY */
+	--m3-sys-light-tertiary: #7d5260;
+	--m3-sys-light-on-tertiary: #ffffff;
+	--m3-sys-light-tertiary-container: #ffd8e4;
+	--m3-sys-light-on-tertiary-container: #31111d;
+	--m3-sys-light-tertiary-fixed: #ffd8e4;
+	--m3-sys-light-on-tertiary-fixed: #31111d;
+	--m3-sys-light-tertiary-fixed-dim: #efb8c8;
+	--m3-sys-light-on-tertiary-fixed-variant: #633b48;
+
+	/* MD3 / LIGHT / ERROR */
+	--m3-sys-light-error: #b3261e;
+	--m3-sys-light-on-error: #ffffff;
+	--m3-sys-light-error-container: #f9dedc;
+	--m3-sys-light-on-error-container: #410e0b;
+
+	/* MD3 / LIGHT / SURFACE */
+	--m3-sys-light-surface-dim: #ded8e1;
+	--m3-sys-light-surface: #fef7ff;
+	--m3-sys-light-surface-bright: #fef7ff;
+	--m3-sys-light-surface-container-lowest: #ffffff;
+	--m3-sys-light-surface-container-low: #f7f2fa;
+	--m3-sys-light-surface-container: #f3edf7;
+	--m3-sys-light-surface-container-high: #ece6f0;
+	--m3-sys-light-surface-container-highest: #e6e0e9;
+	--m3-sys-light-surface: #fef7ff;
+	--m3-sys-light-on-surface: #1d1b20;
+	--m3-sys-light-on-surface-variant: #49454f;
+	--m3-sys-light-outline: #79747e;
+	--m3-sys-light-outline-variant: #cac4d0;
+	--m3-sys-light-inverse-surface: #322f35;
+	--m3-sys-light-inverse-on-surface: #f5eff7;
+	--m3-sys-light-on-primary-container: #21005d;
+	--m3-sys-light-inverse-primary: #d0bcff;
+	--m3-sys-light-scrim: #000000;
+	--m3-sys-light-shadow: #000000;
+
+	/* MD3 / LIGHT / ELEVATION */
+	--m3-elevation-light-1: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.3),
+		0rem 0.1rem 0.3rem 0.1rem rgba(0, 0, 0, 0.15);
+	--m3-elevation-light-2: 0rem 0.1rem 0.2rem rgba(0, 0, 0, 0.3),
+		0rem 0.2rem 0.6rem 0.2rem rgba(0, 0, 0, 0.15);
+	--m3-elevation-light-3: 0rem 0.4rem 0.8rem 0.3rem rgba(0, 0, 0, 0.15),
+		0rem 0.1rem 0.3rem rgba(0, 0, 0, 0.3);
+	--m3-elevation-light-4: 0rem 0.6rem 1rem 0.4rem rgba(0, 0, 0, 0.15),
+		0rem 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+	--m3-elevation-light-5: 0rem 0.8rem 1.2rem 0.6rem rgba(0, 0, 0, 0.15),
+		0rem 0.4rem 0.4rem rgba(0, 0, 0, 0.3);
+
+	/* MD3 / LIGHT / STATE LAYERS / PRIMARY */
+	--m3-state-layers-light-primary-opacity-08: rgba(103, 80, 164, 0.08);
+	--m3-state-layers-light-primary-opacity-12: rgba(103, 80, 164, 0.12);
+	--m3-state-layers-light-primary-opacity-16: rgba(103, 80, 164, 0.16);
+	--m3-state-layers-light-on-primary-opacity-08: rgba(255, 255, 255, 0.08);
+	--m3-state-layers-light-on-primary-opacity-12: rgb(255, 255, 255, 0.12);
+	--m3-state-layers-light-on-primary-opacity-16: rgb(255, 255, 255, 0.16);
+	--m3-state-layers-light-primary-container-opacity-08: rgba(
+		234,
+		221,
+		255,
+		0.08
+	);
+	--m3-state-layers-light-primary-container-opacity-12: rgba(
+		234,
+		221,
+		255,
+		0.12
+	);
+	--m3-state-layers-light-primary-container-opacity-16: rgba(
+		234,
+		221,
+		255,
+		0.16
+	);
+	--m3-state-layers-light-on-primary-container-opacity-08: rgba(
+		33,
+		0,
+		93,
+		0.08
+	);
+	--m3-state-layers-light-on-primary-container-opacity-12: rgba(
+		33,
+		0,
+		93,
+		0.12
+	);
+	--m3-state-layers-light-on-primary-container-opacity-16: rgba(
+		33,
+		0,
+		93,
+		0.16
+	);
+	--m3-state-layers-light-primary-fixed-opacity-08: rgba(234, 221, 255, 0.08);
+	--m3-state-layers-light-primary-fixed-opacity-12: rgba(234, 221, 255, 0.12);
+	--m3-state-layers-light-primary-fixed-opacity-16: rgba(234, 221, 255, 0.16);
+	--m3-state-layers-light-on-primary-fixed-opacity-08: rgba(33, 0, 93, 0.08);
+	--m3-state-layers-light-on-primary-fixed-opacity-12: rgba(33, 0, 93, 0.12);
+	--m3-state-layers-light-on-primary-fixed-opacity-16: rgba(33, 0, 93, 0.16);
+	--m3-state-layers-light-primary-fixed-dim-opacity-08: rgba(
+		208,
+		188,
+		255,
+		0.08
+	);
+	--m3-state-layers-light-primary-fixed-dim-opacity-12: rgba(
+		208,
+		188,
+		255,
+		0.12
+	);
+	--m3-state-layers-light-primary-fixed-dim-opacity-16: rgba(
+		208,
+		188,
+		255,
+		0.16
+	);
+	--m3-state-layers-light-on-primary-fixed-variant-opacity-08: rgba(
+		79,
+		55,
+		139,
+		0.08
+	);
+	--m3-state-layers-light-on-primary-fixed-variant-opacity-12: rgba(
+		79,
+		55,
+		139,
+		0.12
+	);
+	--m3-state-layers-light-on-primary-fixed-variant-opacity-16: rgba(
+		79,
+		55,
+		139,
+		0.16
+	);
+
+	/* MD3 / LIGHT / STATE LAYERS / SECONDARY */
+	--m3-state-layers-light-secondary-opacity-08: rgba(98, 91, 113, 0.08);
+	--m3-state-layers-light-secondary-opacity-12: rgba(98, 91, 113, 0.12);
+	--m3-state-layers-light-secondary-opacity-16: rgba(98, 91, 113, 0.16);
+	--m3-state-layers-light-on-secondary-opacity-08: rgba(255, 255, 255, 0.08);
+	--m3-state-layers-light-on-secondary-opacity-12: rgba(255, 255, 255, 0.12);
+	--m3-state-layers-light-on-secondary-opacity-16: rgba(255, 255, 255, 0.16);
+	--m3-state-layers-light-secondary-container-opacity-08: rgba(
+		232,
+		222,
+		248,
+		0.08
+	);
+	--m3-state-layers-light-secondary-container-opacity-12: rgba(
+		232,
+		222,
+		248,
+		0.12
+	);
+	--m3-state-layers-light-secondary-container-opacity-16: rgba(
+		232,
+		222,
+		248,
+		0.16
+	);
+	--m3-state-layers-light-on-secondary-container-opacity-08: rgba(
+		29,
+		25,
+		43,
+		0.08
+	);
+	--m3-state-layers-light-on-secondary-container-opacity-12: rgba(
+		29,
+		25,
+		43,
+		0.12
+	);
+	--m3-state-layers-light-on-secondary-container-opacity-16: rgba(
+		29,
+		25,
+		43,
+		0.16
+	);
+	--m3-state-layers-light-secondary-fixed-opacity-08: rgba(232, 222, 248, 0.08);
+	--m3-state-layers-light-secondary-fixed-opacity-12: rgba(232, 222, 248, 0.12);
+	--m3-state-layers-light-secondary-fixed-opacity-16: rgba(232, 222, 248, 0.16);
+	--m3-state-layers-light-on-secondary-fixed-opacity-08: rgba(29, 25, 43, 0.08);
+	--m3-state-layers-light-on-secondary-fixed-opacity-12: rgba(29, 25, 43, 0.12);
+	--m3-state-layers-light-on-secondary-fixed-opacity-16: rgba(29, 25, 43, 0.16);
+	--m3-state-layers-light-secondary-fixed-dim-opacity-08: rgba(
+		204,
+		194,
+		220,
+		0.08
+	);
+	--m3-state-layers-light-secondary-fixed-dim-opacity-12: rgba(
+		204,
+		194,
+		220,
+		0.12
+	);
+	--m3-state-layers-light-secondary-fixed-dim-opacity-16: rgba(
+		204,
+		194,
+		220,
+		0.16
+	);
+	--m3-state-layers-light-on-secondary-fixed-variant-opacity-08: rgba(
+		74,
+		68,
+		88,
+		0.08
+	);
+	--m3-state-layers-light-on-secondary-fixed-variant-opacity-12: rgba(
+		74,
+		68,
+		88,
+		0.12
+	);
+	--m3-state-layers-light-on-secondary-fixed-variant-opacity-16: rgba(
+		74,
+		68,
+		88,
+		0.16
+	);
+
+	/* MD3 / LIGHT / STATE LAYERS / TERTIARY */
+	--m3-state-layers-light-tertiary-opacity-08: rgba(125, 82, 96, 0.08);
+	--m3-state-layers-light-tertiary-opacity-12: rgba(125, 82, 96, 0.12);
+	--m3-state-layers-light-tertiary-opacity-16: rgba(125, 82, 96, 0.16);
+	--m3-state-layers-light-on-tertiary-opacity-08: rgba(255, 255, 255, 0.08);
+	--m3-state-layers-light-on-tertiary-opacity-12: rgba(255, 255, 255, 0.12);
+	--m3-state-layers-light-on-tertiary-opacity-16: rgba(255, 255, 255, 0.16);
+	--m3-state-layers-light-tertiary-container-opacity-08: rgba(
+		255,
+		216,
+		228,
+		0.08
+	);
+	--m3-state-layers-light-tertiary-container-opacity-12: rgba(
+		255,
+		216,
+		228,
+		0.12
+	);
+	--m3-state-layers-light-tertiary-container-opacity-16: rgba(
+		255,
+		216,
+		228,
+		0.16
+	);
+	--m3-state-layers-light-on-tertiary-container-opacity-08: rgba(
+		49,
+		17,
+		29,
+		0.08
+	);
+	--m3-state-layers-light-on-tertiary-container-opacity-12: rgba(
+		49,
+		17,
+		29,
+		0.12
+	);
+	--m3-state-layers-light-on-tertiary-container-opacity-16: rgba(
+		49,
+		17,
+		29,
+		0.16
+	);
+	--m3-state-layers-light-tertiary-fixed-opacity-08: rgba(255, 216, 228, 0.08);
+	--m3-state-layers-light-tertiary-fixed-opacity-12: rgba(255, 216, 228, 0.12);
+	--m3-state-layers-light-tertiary-fixed-opacity-16: rgba(255, 216, 228, 0.16);
+	--m3-state-layers-light-on-tertiary-fixed-opacity-08: rgba(49, 17, 29, 0.08);
+	--m3-state-layers-light-on-tertiary-fixed-opacity-12: rgba(49, 17, 29, 0.12);
+	--m3-state-layers-light-on-tertiary-fixed-opacity-16: rgba(49, 17, 29, 0.16);
+	--m3-state-layers-light-tertiary-fixed-dim-opacity-08: rgba(
+		239,
+		184,
+		200,
+		0.08
+	);
+	--m3-state-layers-light-tertiary-fixed-dim-opacity-12: rgba(
+		239,
+		184,
+		200,
+		0.12
+	);
+	--m3-state-layers-light-tertiary-fixed-dim-opacity-16: rgba(
+		239,
+		184,
+		200,
+		0.16
+	);
+	--m3-state-layers-light-on-tertiary-fixed-variant-opacity-08: rgba(
+		99,
+		59,
+		72,
+		0.08
+	);
+	--m3-state-layers-light-on-tertiary-fixed-variant-opacity-12: rgba(
+		99,
+		59,
+		72,
+		0.12
+	);
+	--m3-state-layers-light-on-tertiary-fixed-variant-opacity-16: rgba(
+		99,
+		59,
+		72,
+		0.16
+	);
+
+	/* MD3 / LIGHT / STATE LAYERS / ERROR */
+	--m3-state-layers-light-error-opacity-08: rgba(179, 38, 30, 0.08);
+	--m3-state-layers-light-error-opacity-12: rgba(179, 38, 30, 0.12);
+	--m3-state-layers-light-error-opacity-16: rgba(179, 38, 30, 0.16);
+	--m3-state-layers-light-on-error-opacity-08: rgba(255, 255, 255, 0.08);
+	--m3-state-layers-light-on-error-opacity-12: rgba(255, 255, 255, 0.12);
+	--m3-state-layers-light-on-error-opacity-16: rgba(255, 255, 255, 0.16);
+	--m3-state-layers-light-error-container-opacity-08: rgba(249, 222, 220, 0.08);
+	--m3-state-layers-light-error-container-opacity-12: rgba(249, 222, 220, 0.12);
+	--m3-state-layers-light-error-container-opacity-16: rgba(249, 222, 220, 0.16);
+
+	/* MD3 / LIGHT / STATE LAYERS / SURFACE */
+	--m3-state-layers-light-surface-dim-opacity-08: rgba(222, 216, 225, 0.08);
+	--m3-state-layers-light-surface-dim-opacity-12: rgba(222, 216, 225, 0.12);
+	--m3-state-layers-light-surface-dim-opacity-16: rgba(222, 216, 225, 0.16);
+	--m3-state-layers-light-surface-opacity-08: rgba(254, 247, 255, 0.08);
+	--m3-state-layers-light-surface-opacity-12: rgba(254, 247, 255, 0.12);
+	--m3-state-layers-light-surface-opacity-16: rgba(254, 247, 255, 0.16);
+	--m3-state-layers-light-surface-bright-opacity-08: rgba(254, 247, 255, 0.08);
+	--m3-state-layers-light-surface-bright-opacity-12: rgba(254, 247, 255, 0.12);
+	--m3-state-layers-light-surface-bright-opacity-16: rgba(254, 247, 255, 0.16);
+	--m3-state-layers-surface-container-lowest-opacity-08: rgba(
+		255,
+		255,
+		255,
+		0.08
+	);
+	--m3-state-layers-surface-container-lowest-opacity-12: rgba(
+		255,
+		255,
+		255,
+		0.12
+	);
+	--m3-state-layers-surface-container-lowest-opacity-16: rgba(
+		255,
+		255,
+		255,
+		0.16
+	);
+	--m3-state-layers-surface-container-low-opacity-08: rgba(247, 242, 250, 0.08);
+	--m3-state-layers-surface-container-low-opacity-12: rgba(247, 242, 250, 0.12);
+	--m3-state-layers-surface-container-low-opacity-16: rgba(247, 242, 250, 0.16);
+	--m3-state-layers-surface-container-opacity-08: rgba(243, 237, 247, 0.08);
+	--m3-state-layers-surface-container-opacity-12: rgba(243, 237, 247, 0.12);
+	--m3-state-layers-surface-container-opacity-16: rgba(243, 237, 247, 0.16);
+	--m3-state-layers-surface-container-high-opacity-08: rgba(
+		236,
+		230,
+		240,
+		0.08
+	);
+	--m3-state-layers-surface-container-high-opacity-12: rgba(
+		236,
+		230,
+		240,
+		0.12
+	);
+	--m3-state-layers-surface-container-high-opacity-16: rgba(
+		236,
+		230,
+		240,
+		0.16
+	);
+
+	--m3-state-layers-surface-container-highest-opacity-08: rgba(
+		230,
+		224,
+		233,
+		0.08
+	);
+	--m3-state-layers-surface-container-highest-opacity-12: rgba(
+		230,
+		224,
+		233,
+		0.12
+	);
+	--m3-state-layers-surface-container-highest-opacity-16: rgba(
+		230,
+		224,
+		233,
+		0.16
+	);
+	--m3-state-layers-light-surface-opacity-08: rgba(254, 247, 255, 0.08);
+	--m3-state-layers-light-surface-opacity-12: rgba(254, 247, 255, 0.12);
+	--m3-state-layers-light-surface-opacity-16: rgba(254, 247, 255, 0.16);
+	--m3-state-layers-light-on-surface-opacity-08: rgba(29, 27, 32, 0.08);
+	--m3-state-layers-light-on-surface-opacity-12: rgba(29, 27, 32, 0.12);
+	--m3-state-layers-light-on-surface-opacity-16: rgba(29, 27, 32, 0.16);
+	--m3-state-layers-light-on-surface-variant-opacity-08: rgba(73, 69, 79, 0.08);
+	--m3-state-layers-light-on-surface-variant-opacity-12: rgba(73, 69, 79, 0.12);
+	--m3-state-layers-light-on-surface-variant-opacity-16: rgba(73, 69, 79, 0.16);
+	--m3-state-layers-light-outline-opacity-08: rgba(121, 116, 126, 0.08);
+	--m3-state-layers-light-outline-opacity-12: rgba(121, 116, 126, 0.12);
+	--m3-state-layers-light-outline-opacity-16: rgba(121, 116, 126, 0.16);
+	--m3-state-layers-light-outline-variant-opacity-08: rgba(202, 196, 208, 0.08);
+	--m3-state-layers-light-outline-variant-opacity-12: rgba(202, 196, 208, 0.12);
+	--m3-state-layers-light-outline-variant-opacity-16: rgba(202, 196, 208, 0.16);
+	--m3-state-layers-light-invere-surface-opacity-08: rgba(50, 47, 53, 0.08);
+	--m3-state-layers-light-invere-surface-opacity-12: rgba(50, 47, 53, 0.12);
+	--m3-state-layers-light-invere-surface-opacity-16: rgba(50, 47, 53, 0.16);
+	--m3-state-layers-light-inverse-on-surface-opacity-08: rgba(
+		245,
+		239,
+		247,
+		0.08
+	);
+	--m3-state-layers-light-inverse-on-surface-opacity-12: rgba(
+		245,
+		239,
+		247,
+		0.12
+	);
+	--m3-state-layers-light-inverse-on-surface-opacity-16: rgba(
+		245,
+		239,
+		247,
+		0.16
+	);
+	--m3-state-layers-light-on-primary-container-opacity-08: rgba(
+		33,
+		0,
+		93,
+		0.08
+	);
+	--m3-state-layers-light-on-primary-container-opacity-12: rgba(
+		33,
+		0,
+		93,
+		0.12
+	);
+	--m3-state-layers-light-on-primary-container-opacity-16: rgba(
+		33,
+		0,
+		93,
+		0.16
+	);
+	--m3-state-layers-light-inverse-primary-opacity-08: rgba(208, 188, 255, 0.08);
+	--m3-state-layers-light-inverse-primary-opacity-12: rgba(208, 188, 255, 0.12);
+	--m3-state-layers-light-inverse-primary-opacity-16: rgba(208, 188, 255, 0.16);
+	--m3-state-layers-light-scrim-opacity-08: rgba(0, 0, 0, 0.08);
+	--m3-state-layers-light-scrim-opacity-12: rgba(0, 0, 0, 0.12);
+	--m3-state-layers-light-scrim-opacity-16: rgba(0, 0, 0, 0.16);
+	--m3-state-layers-light-shadow-opacity-08: rgba(0, 0, 0, 0.08);
+	--m3-state-layers-light-shadow-opacity-12: rgba(0, 0, 0, 0.12);
+	--m3-state-layers-light-shadow-opacity-16: rgba(0, 0, 0, 0.16);
+
+	/* M3 / COMPOSITES / LIGHT */
+	--m3-composite-light-primary-passthrough-on-primary-opacity-08: #735eab;
+	--m3-composite-light-primary-passthrough-on-primary-opacity-12: #7965af;
+	--m3-composite-light-surface-container-low-passthrough-primary-opacity-08: #ebe5f3;
+	--m3-composite-light-surface-container-low-passthrough-primary-opacity-12: #e6dff0;
+	--m3-composite-light-surface-container-low-passthrough-on-surface-variant-opacity-08: #f7f2fa;
+	--m3-composite-light-surface-container-low-passthrough-on-surface-variant-opacity-12: #e2dde5;
+	--m3-composite-light-surface-container-low-passthrough-on-surface-variant-opacity-16: #e2dde5;
+	--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-08: #d8cee8;
+	--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-12: #d0c6df;
+	--m3-composite-light-secondary-container-passthrough-on-secondary-container-opacity-16: #c8bfd7;
+	--m3-composite-light-surface-passthrough-on-surface-variant-opacity-12: #e8e2ea;
+	--m3-composite-light-surface-passthrough-on-surface-variant-opacity-08: #f0e9f1;
+	--m3-composite-light-surface-container-high-passthrough-primary-opacity-08: #e1daea;
+	--m3-composite-light-surface-container-high-passthrough-primary-opacity-12: #dcd4e7;
+	--m3-composite-light-primary-container-passthrough-on-primary-container-opacity-08: #dacbf2;
+	--m3-composite-light-primary-container-passthrough-on-primary-container-opacity-12: #d2c2ec;
+	--m3-composite-light-tertiary-container-passthrough-on-tertiary-container-opacity-08: #efc8d4;
+	--m3-composite-light-tertiary-container-passthrough-on-tertiary-container-opacity-12: #e6c0cc;
+	--m3-composite-light-surface-container-highest-passthrough-on-surface-opacity-08: #d6d0d9;
+	--m3-composite-light-surface-passthrough-on-surface-opacity-08: #ede7f0;
+	--m3-composite-light-surface-passthrough-on-surface-opacity-12: #ddd8e0;
+	--m3-composite-light-surface-container-highest-passthrough-on-primary-opacity-08: #dcd4e4;
+	--m3-composite-light-surface-container-highest-passthrough-on-primary-opacity-12: #d7cfe1;
+	--m3-composite-light-surface-container-highest-passthrough-on-surface-variant-opacity-08: #d9d4dd;
+	--m3-composite-light-surface-container-highest-passthrough-on-surface-variant-opacity-12: #d3cdd7;
+	--m3-composite-light-inverse-on-surface-passthrough-on-surface-variant-opacity-08: #f0eaf1;
+	--m3-composite-light-inverse-on-surface-passthrough-on-surface-variant-opacity-12: #e8e1e9;
+	--m3-composite-light-on-surface-variant-passthrough-on-surface-variant-opacity-08: #423e45;
+	--m3-composite-light-on-surface-variant-passthrough-on-surface-variant-opacity-12: #49464c;
+	--m3-composite-light-on-surface-variant-passthrough-on-surface-opacity-08: #e6e1e9;
+}

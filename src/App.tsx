@@ -21,7 +21,7 @@ export default function App() {
 		const fetchPokemonNames = async () => {
 			// fetches all pokemon names
 			const response = await fetch(
-				"https://pokeapi.co/api/v2/pokemon?limit=1118"
+				"https://pokeapi.co/api/v2/pokemon?limit=1010"
 			);
 			const data = await response.json();
 			const names = data.results.map((result: { name: string }) => result.name);

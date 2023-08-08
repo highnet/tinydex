@@ -40,6 +40,7 @@ export default function App() {
 			)})$`
 		);
 
+		// if the input is not a valid id or name, try to find a pokemon with a matching name
 		if (!validRegex.test(pokemonNameOrIdSearchTerm)) {
 			const pokemonWithMatchingName = partialPokemonNameSearch(
 				allPokemonNames,
